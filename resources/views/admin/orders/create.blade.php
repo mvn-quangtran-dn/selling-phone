@@ -16,7 +16,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <lablel>Mã Khuyến Mãi</lablel>
+                        <label for="">Mã Khuyến mãi</label>
                         <select name="promotion_id" id="" class="form-control">
                             @foreach($promotions as $promotion)
                                 <option value="{{$promotion->id}}">{{$promotion->name}}</option>
@@ -24,7 +24,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <lable>Order Status</lable>
+                        <label for="">Order Status</label>
                         <select name="status_id" class="form-control">
                             <option value="">Status</option>
                             @foreach($statuses as $status)
@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <lable>Số Lượng</lable>
+                            <label for="">Số lượng</label>
                             <input type="text" name="quantity" id="qtt" class="form-control" value="1">
                         </div>
                     </div>
