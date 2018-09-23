@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
 <h1>Create Category</h1>
 <form action="{{route('categories.store')}}" method="post">
