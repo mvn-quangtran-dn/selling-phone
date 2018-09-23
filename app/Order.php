@@ -21,4 +21,12 @@ class Order extends Model
     {
         return $this->hasManyThrough('App\Product', 'App\OrderDetail', 'product_id', 'id', 'id');
     }
+    public function status()
+    {
+        return $this->hasOne('App\Status');
+    }
+    public function paymentstatus()
+    {
+        return $this->hasOne('App\PaymentStatus');
+    }
 }

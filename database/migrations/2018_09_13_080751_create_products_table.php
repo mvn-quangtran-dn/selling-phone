@@ -20,14 +20,17 @@ class CreateProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('screen');//màn hình
             $table->string('system');//Hệ điều hành
-            $table->string('fcamera');//Camera trước
-            $table->string('bcamera');//Camera sau
-            $table->string('cpu');
-            $table->string('ram');
-            $table->string('rom');//Bộ nhớ trong
-            $table->string('smenory');//thẻ nhớ ngoài
+            $table->integer('fcamera');//Camera trước
+            $table->integer('bcamera');//Camera sau
+            $table->integer('cpu');
+            $table->integer('ram');
+            $table->integer('rom');//Bộ nhớ trong
+            $table->integer('smenory');//thẻ nhớ ngoài
             $table->string('pin');
             $table->text('description');//Mô tả
+            $table->float('price');
+            $table->string('code_product'); //mã sản phẩm
+            $table->integer('quantity'); //số lượng sản phẩm
             $table->timestamps();
         });
     }
