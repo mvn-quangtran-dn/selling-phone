@@ -14,9 +14,26 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Admin Login
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
+   Route::get('/', 'PageController@index')->name('index');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::post('login', 'LoginController@login');
+    Route::get('logout', 'LoginController@logout')->name('logout');
+});
+
+
 Route::resource('admin/categories', 'Admin\CategoryController');
 Route::resource('admin/products', 'Admin\ProductController');
 Route::resource('admin/orders', 'Admin\OrderController');
+Route::resource('admin/users', 'Admin\UserController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
