@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::resource('admin/categories', 'Admin\CategoryController');
+Route::resource('admin/products', 'Admin\ProductController');
+Route::resource('admin/orders', 'Admin\OrderController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
