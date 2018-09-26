@@ -69,6 +69,9 @@
             </form>
         </div>
     </div>
+    <script src="{{ url('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url('js/popper.min.js') }}"></script>
+    <script src="{{ url('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript">
         var cart = [];
         var qtt = 0;
@@ -81,6 +84,7 @@
             displayOrder();
             //khi click vào id="product" thì sẽ tạo ra order
             $('#product').on("click", function () {
+                console.log('asdas');
                 var product = $(this);
                 var qtt = parseInt($('#qtt').val());
                 // alert(qtt);
