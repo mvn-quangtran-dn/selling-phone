@@ -52,7 +52,9 @@
                 <div class="col-lg-4">
                     <h3 class="text-center">Order Summary</h3>
                     <table class="table table-bordered" id="table_product">
-                        <tr class="text-center">No Items Selected</tr>
+                        <tr>
+                            <td>No Items Selected</td>
+                        </tr>
                         <tr>
                             <td>Sub Total</td>
                             <td>0</td>
@@ -117,9 +119,12 @@
                 function displayOrder() {
                     if (sessionStorage['order'] != null) {
                         cart = JSON.parse(sessionStorage['order'].toString());
-                        $.each(cart, function () {
+                        $("#table_product").html("");
+                        $.each(cart, function (index, data) {
                             var html =  "";
-                            html += "<tr>" + data.name + "</tr>";
+                            html += "<tr>";
+                            html += "<td>" + data.name + "</td>";
+                            html += "</tr>";
                             html += "<tr>";
                             html += "<td>" + "Sub total" + "</td>";
                             html += "<td>" + data.total + "</td>";
@@ -129,7 +134,7 @@
                             html += "<td>" + data.total + "</td>";
                             html += "</tr>";
 
-                            $("#product").append(html);
+                            $("#table_product").append(html);
                         });
                     }
                 }
