@@ -33,6 +33,7 @@
       <td>{{$product->category_id}}</td>
       <td>{{$product->created_at}}</td>
     </tr>
+      <script src="{{ url('js/jquery-3.2.1.min.js') }}"></script>
       <script type="text/javascript">
         $(document).ready(function() {
           $("#product{{$product->id}}").hover(function() {
