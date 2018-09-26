@@ -33,9 +33,11 @@
       <td>{{$product->category_id}}</td>
       <td>{{$product->created_at}}</td>
     </tr>
+
       <script type="text/javascript">
         $(document).ready(function() {
           $("#product{{$product->id}}").hover(function() {
+              console.log("da den");
             $("#showid").show();
           });
         });
