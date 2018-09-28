@@ -94,29 +94,29 @@
       </div>
       <ul class="app-menu">
         <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Categories</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Quản lý danh mục</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{ route('categories.index') }}"><i class="icon fa fa-circle-o"></i>List</a></li>
+            <li><a class="treeview-item" href="{{ route('categories.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Products</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa  fa fa-cube"></i><span class="app-menu__label">Quản lý sản phẩm</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{ route('products.index') }}"><i class="icon fa fa-circle-o"></i>List</a></li>
+            <li><a class="treeview-item" href="{{ route('products.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Users</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Quản lý người dùng</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{ route('users.index') }}"><i class="icon fa fa-circle-o"></i>List</a></li>
+            <li><a class="treeview-item" href="{{ route('users.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
-          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Orders</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cart-plus"></i><span class="app-menu__label">Quản lý đơn đặt hàng</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{ route('orders.index') }}"><i class="icon fa fa-circle-o"></i>List</a></li>
+            <li><a class="treeview-item" href="{{ route('orders.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
-          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Comments</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments-o"></i><span class="app-menu__label">Quản lý bình luận</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>List</a></li>
+            <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
       </ul>
