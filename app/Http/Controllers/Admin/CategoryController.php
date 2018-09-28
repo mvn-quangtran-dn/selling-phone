@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use Validator;
+use App\Http\Requests\CategoryValidate;
+
 class CategoryController extends Controller
 {
     public function index()
@@ -17,7 +20,7 @@ class CategoryController extends Controller
         $categories = Category::where('parent_id', '=', 0)->get();
         return view('admin.categories.create', compact('categories'));
     }
-    public function store(Request $request)
+    public function store(CategoryValidate $request)
     {
         $data = [
           'name' => $request->name,
@@ -26,13 +29,13 @@ class CategoryController extends Controller
         Category::create($data);
         return redirect()->route('categories.index');
     }
-    public function edit(Category $category)
+    public function edit(Request $category)
     {
         //dd($category);
         $categories = Category::where('parent_id', '=', 0)->get();
         return view('admin.categories.edit', compact('categories', 'category'));
     }
-    public function update(Category $category, Request $request)
+    public function update(Category $category, CategoryValidate $request)
     {
         $data = $request->all();
         $category->update($data);

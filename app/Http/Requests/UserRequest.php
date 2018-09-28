@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
             'name.required' => 'Please enter your name',
