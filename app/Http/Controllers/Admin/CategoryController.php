@@ -29,7 +29,7 @@ class CategoryController extends Controller
         Category::create($data);
         return redirect()->route('categories.index');
     }
-    public function edit(Request $category)
+    public function edit(Category $category)
     {
         //dd($category);
         $categories = Category::where('parent_id', '=', 0)->get();
