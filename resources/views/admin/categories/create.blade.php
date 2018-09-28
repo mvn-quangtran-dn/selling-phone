@@ -3,6 +3,15 @@
 <h1>Create Category</h1>
 <form action="{{route('categories.store')}}" method="post">
   {{ csrf_field() }}
+  <?php if ($errors->any()): ?>
+      <div class="text-danger">
+        <ul>
+          <?php foreach ($errors->all() as $error): ?>
+              <li>{{$error}}</li>
+          <?php endforeach ?>
+        </ul>
+      </div>
+  <?php endif ?>
   <div class="form-group">
     <label for="">Name</label>
     <input type="text" name="name" class="form-control" value="">

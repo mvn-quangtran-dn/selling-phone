@@ -21,7 +21,7 @@ class ProductController extends Controller
         $categories = Category::where('parent_id', '!=', "0")->get();
         return view('admin.products.create', compact('categories'));
     }
-    public function store(Request $request)
+    public function store(CategoryValidate $request)
     {
         //dd($request->all());
         $data = [
@@ -65,7 +65,7 @@ class ProductController extends Controller
         $images = Image::get();
         return view('admin.products.edit', compact('product', 'categories', 'images'));
     }
-    public function destroy(Product $product){
+    public function destroy(CategoryValidate $product){
         $product->delete();
         return redirect()->route('products.index');
     }
