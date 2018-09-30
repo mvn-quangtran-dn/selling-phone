@@ -1,0 +1,58 @@
+/*CSS login*/
+.login a {
+  padding: 10px;
+}
+
+
+/*CSS menu*/
+.menu {
+  background: #90bfa1;
+}
+
+.menu ul {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.menu ul li {
+  display: inline-block;
+
+}
+
+.menu ul li a {
+  color: #fff;
+  display: block;
+  padding: 10px;
+}
+
+
+/*CSS footer*/
+footer {
+  background: #f1f1f1;
+}
+/*CSS shopping cart*/
+body {
+	background: #f5f8fa !important;
+}
+.content {
+	width: 600px;
+	margin: 0 auto;
+}
+.cart-content {
+	background: #fff;
+	padding: 10px;
+}
+sup {
+	color: red;
+}
+.cart-content img {
+	width: 70%;
+    border: solid 1px #f1f1f1;
+}
+.cart-subtract,
+.cart-add {
+	border: solid 1px #f1f1f1;
+	padding: 0 8px;
+}
+
+/*CSS Pagination*/

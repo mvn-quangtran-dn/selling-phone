@@ -11,29 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index')->name('home.index');
+
+// Auth::routes();
+
+Route::group(['prefix' => 'admin','namespace' => 'Admin', 'middleware' => 'admin-login'], function(){
+	Route::get('/', 'PageController@index')->name('admin.index');
+	Route::resource('/categories', 'CategoryController');
+	Route::resource('/products', 'ProductController');
+	Route::resource('/orders', 'OrderController');
+	Route::resource('/users', 'UserController');
 });
 
-// Admin Login
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
-   Route::get('/', 'PageController@index')->name('index');
+// Route login Admin
+Route::group(['prefix' => 'admin', 'namespace' => 'Loginadmin', 'as' => 'admin.'], function(){
+	Route::get('/login', 'LoginController@login')->name('login');
+	Route::post('/login', 'LoginController@showLogin')->name('showlogin');
+	Route::get('/logout', 'LoginController@logout')->name('logout');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
-    Route::get('login', 'LoginController@showLoginForm')->name('login');
-    Route::post('login', 'LoginController@login');
-    Route::get('logout', 'LoginController@logout')->name('logout');
+// Route login user
+Route::group(['prefix' => '/', 'namespace' => 'Loginuser', 'as' => 'users.'], function(){
+	Route::get('/login', 'LoginController@login')->name('login');
+	Route::post('/login', 'LoginController@showLogin')->name('showlogin');
+	Route::get('/logout', 'LoginController@logout')->name('logout');
+	Route::get('/register', 'LoginController@register')->name('register');
+	Route::post('/register', 'LoginController@showRegister')->name('showregister');
 });
-
-
-Route::resource('admin/categories', 'Admin\CategoryController');
-Route::resource('admin/products', 'Admin\ProductController');
-Route::resource('admin/orders', 'Admin\OrderController');
-Route::resource('admin/users', 'Admin\UserController');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
