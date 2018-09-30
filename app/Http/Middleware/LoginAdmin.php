@@ -19,9 +19,9 @@ class LoginAdmin
         if (Auth::check() && Auth::user()->role_id == 1) {
             return $next($request);
         } else if (Auth::check()){
-             return redirect('/');
+             return redirect()->route('home.index');
         } else {
-            return redirect('/admin/login');
+            return redirect()->route('admin.login');
         }
     }
 }

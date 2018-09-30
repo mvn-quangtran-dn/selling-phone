@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 	<h2>Thông tin người dùng {{ $user->yourname }}</h2>
-	<table class="table table-dark table-striped">
+	<table class="table table-light table-striped">
 		<tr>
 			<td class="text-center"><h2>Thông tin đăng nhập</h2></td>
 			<td></td>
@@ -40,6 +40,6 @@
 			<td>{{ $user->role->name }}</td>
 		</tr>
 	</table>
-	<a href="{{ route('users.index') }}" class="run-back"><i class="fa fa-hand-o-left"> Quay lại</i></a>
+	<a href="{{ route('users.index') }}" class="btn btn-info"><i class="fa fa-hand-o-left">&nbsp;&nbsp;Quay lại</i></a>
 </div>
 @endsection

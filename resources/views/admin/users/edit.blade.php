@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container">
-	<a href="{{ route('users.index') }}" class="run-back"><i class="fa fa-hand-o-left"> Quay lại</i></a>
 	<form action="{{ route('users.update', $user->id) }}" method="post">
 		{{ csrf_field() }}
 		{{ method_field('PUT') }}
@@ -59,6 +58,7 @@
 		</div>
 		<div class="from-group">
 			<input type="submit" value="Chỉnh sửa" class="btn btn-primary">
+			<a href="{{ route('users.index') }}" class="btn btn-info"><i class="fa fa-hand-o-left">&nbsp;&nbsp;Quay lại</i></a>
 		</div>
 	</form>
 </div>

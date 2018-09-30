@@ -4,16 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Http\Requests\ManageUser;
 use App\Role;
+use App\User;
 
 class UserController extends Controller
 {
- public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        $users = User::all();
-    	$roles = Role::all();
-    	return view('admin.users.list', compact('users', 'roles'));
+        $users = User::paginate(5);
+        $roles = Role::all();
+        return view('admin.users.index', compact('users', 'roles'));
     }
 
     /**
@@ -23,8 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-    	$roles = Role::all();
-        return view('admin.users.add', compact('roles'));
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -33,7 +39,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ManageUser $request)
     {
         $data = $request->all();
         User::create($data);
@@ -46,10 +52,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
-        return view('admin.users.view', compact('user'));	
+        return view('admin.users.view', compact('user'));
     }
 
     /**
@@ -58,11 +63,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-    	$roles = Role::all();
-        $user = User::find($id);
-        return view('admin.users.edit', compact('user', 'roles'));
+        $roles = Role::all();
+        return view('admin.users.edit', compact('roles', 'user'));
     }
 
     /**
@@ -72,10 +76,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ManageUser $request, User $user)
     {
         $data = $request->all();
-        $user = User::find($id);
         $user->update($data);
         return redirect()->route('users.index');
     }
@@ -86,15 +89,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $user = User::find($id);    
-		$user->delete();
+        // $user->delete();
+        // return redirect()->route('users.index');
+        $user = User::findOrFail($request->user_id);
+        $user->delete();
         return redirect()->route('users.index');
-    }
-
-    public function test()
-    {
-        dd(User::all());
     }
 }
