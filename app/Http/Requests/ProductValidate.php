@@ -24,28 +24,28 @@ class ProductValidate extends FormRequest
     public function rules()
     {
         return [
-            "name" => "bail|required|alpha_dash|min:6|max:50",
+            "name" => "bail|required|min:6|max:50",
             "cpu" => "bail|required|numeric",
             "screen" => "bail|required|numeric",
-            "system" => "bail|required|alpha_dash",
+            "system" => "bail|required",
             "bcamera" => "bail|required|numeric",
             "fcamera" => "bail|required|numeric",
             "ram" => "bail|required|numeric",
             "rom" => "bail|required|numeric",
-            "smemory" => "bail|required|numeric",
+            "smenory" => "bail|required|numeric",
             "pin" => "bail|required|numeric",
             "quantity" => "bail|required|numeric",
             "price" => "bail|required|numeric",
             "description" => "bail|required|min:20|max:255",
             "category_id" => "bail|required|numeric",
-            "images" => "bail|required|image",
+            "images" => "bail|required",
         ];
     }
     public function messages()
     {
         return [
             "name.required" => "Tên của sản phẩm không được để trống",
-            "name.alpha_dash" => "Tên của sản phẩm phải là chữ và số để trống",
+            "name.alpha_dash" => "Tên của sản phẩm phải là chữ và số",
             "name.min" => "Tên sản phẩm không có độ dài nhỏ hơn :min",
             "name.max" => "Tên sản phẩm không có độ dài lớn hơn :max",
             "cpu.required" => "Trường CPU không được để trống",
@@ -62,8 +62,8 @@ class ProductValidate extends FormRequest
             "ram.numeric" => "Trường Ram phải là số",
             "rom.required" => "Trường Bộ nhớ trong không được để trống",
             "rom.numeric" => "Trường Bộ nhớ trong phải là số",
-            "smemory.required" => "Trường Thẻ nhớ ngoài không được để trống",
-            "smemory.numeric" => "Trường Thẻ nhớ ngoài phải là số",
+            "smenory.required" => "Trường Thẻ nhớ ngoài không được để trống",
+            "smenory.numeric" => "Trường Thẻ nhớ ngoài phải là số",
             "quantity.required" => "Trường Số lượng không được để trống",
             "quantity.numeric" => "Trường Số lượng phải là số",
             "pin.required" => "Trường Pin không được để trống",

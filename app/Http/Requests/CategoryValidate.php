@@ -24,8 +24,8 @@ class CategoryValidate extends FormRequest
     public function rules()
     {
         return [
-            'name' => "required|min:6|max:12",
-            'parent_id' => "bail|min:1|max:6",
+            'name' => "required|min:3|max:12",
+            'parent_id' => "bail|min:0|max:3",
         ];
     }
     public function messages()

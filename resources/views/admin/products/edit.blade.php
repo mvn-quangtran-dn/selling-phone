@@ -4,6 +4,15 @@
   <h1>Edit Product</h1>
   <form action="{{route('products.update', $product->id)}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
+    <?php if ($errors->any()): ?>
+      <div class="text-danger">
+        <ul>
+          <?php foreach ($errors->all() as $error): ?>
+              <li>{{$error}}</li>
+          <?php endforeach ?>
+        </ul>
+      </div>
+  <?php endif ?>
     <input type="hidden" name="_method" value="put">
     <div class="form-group">
       <label for="">Name</label>
@@ -46,7 +55,7 @@
       @if($errors->has('fcamera'))
         <p class="text-danger">{{$errors->first('fcamera')}}</p>
       @endif
-    </div>system
+    </div>
     <div class="form-group">
       <label for="">Ram</label>
       <input type="text" name="ram" class="form-control" value="{{$product->ram}}">
@@ -63,9 +72,9 @@
     </div>
     <div class="form-group">
       <label for="">Thẻ nhớ ngoài</label>
-      <input type="text" name="smemory" class="form-control" value="{{$product->smenory}}">
-      @if($errors->has('smemory'))
-        <p class="text-danger">{{$errors->first('smemory')}}</p>
+      <input type="text" name="smenory" class="form-control" value="{{$product->smenory}}">
+      @if($errors->has('smenory'))
+        <p class="text-danger">{{$errors->first('smenory')}}</p>
       @endif
     </div>
     <div class="form-group">

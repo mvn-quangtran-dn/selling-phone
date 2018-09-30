@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Category;
 use App\Image;
-
+use App\Http\Requests\ProductValidate;
 class ProductController extends Controller
 {
     public function index()
@@ -21,37 +21,22 @@ class ProductController extends Controller
         $categories = Category::where('parent_id', '!=', "0")->get();
         return view('admin.products.create', compact('categories'));
     }
-    public function store(CategoryValidate $request)
+    public function store(ProductValidate $request) //ProductValidate
     {
-        //dd($request->all());
-        $data = [
-            "name" => $request->get('name'),
-            "quantity" => $request->get('quantity'),
-            "cpu" => $request->get('cpu'),
-            "screen" => $request->get('screen'),
-            "system" => $request->get('system'),
-            "bcamera" => $request->get('bcamera'),
-            "fcamera" => $request->get('fcamera'),
-            "ram" => $request->get('ram'),
-            "rom" => $request->get('rom'),
-            "smenory" => $request->get("smemory"),
-            "pin" => $request->get('pin'),
-            "price" => $request->get('price'),
-            "category_id" => $request->get('category_id'),
-            "description" => $request->get('description'),
-            "code_product" => date('d').date('m').date('Y').$request->get('name')
-        ];
-        $product = Product::create($data);
+        $dataProducts = $request->all();        
+        $dataProducts["code_product"] = date('d').date('m').date('Y').$request->get('name');        
+        //dd($dataProducts);
+        $product = Product::create($dataProducts);
         if ($request->file('images')) {
             foreach ($request->file('images') as $image) {
                 $image_name = date('d-m-Y').$image->getClientOriginalName();
                 $path = 'image';
                 $image->move($path, $image_name);
-                $data = [
+                $dataImg = [
                     'name' => $path.'/'.$image_name,
                     'product_id' => $product->id
                 ];
-                Image::create($data);
+                Image::create($dataImg);
             }
         }
 
@@ -69,9 +54,11 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index');
     }
-    public function update(Product $product, Request $request){
+    public function update(Product $product, ProductValidate $request){
         $data = $request->all();
         $product->update($data);
+        $dataImg = $request->get('images');
+        //Image::update($dataImg);
         return redirect()->route('products.index');
     }
 
