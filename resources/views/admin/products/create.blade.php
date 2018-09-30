@@ -62,9 +62,9 @@
     </div>
     <div class="form-group">
       <label for="">Thẻ nhớ ngoài</label>
-      <input type="text" name="smemory" class="form-control" value="">
-      @if($errors->has('smemory'))
-        <p class="text-danger">{{$errors->first('smemory')}}</p>
+      <input type="text" name="smenory" class="form-control" value="">
+      @if($errors->has('smenory'))
+        <p class="text-danger">{{$errors->first('smenory')}}</p>
       @endif
     </div>
     <div class="form-group">

@@ -20,6 +20,7 @@
     <label for="">Parent</label>
     <select class="form-control" name="parent_id">
       <option value="0">Menu</option>
+
       @foreach($categories as $category)
       <option value="{{$category->id}}">{{$category->name}}</option>
       @endforeach

@@ -17,7 +17,7 @@ class CategoryController extends Controller
     }
     public function create()
     {
-        $categories = Category::where('parent_id', '=', 0)->get();
+        $categories = Category::get();
         return view('admin.categories.create', compact('categories'));
     }
     public function store(CategoryValidate $request)
@@ -32,7 +32,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //dd($category);
-        $categories = Category::where('parent_id', '=', 0)->get();
+        $categories = Category::get();
         return view('admin.categories.edit', compact('categories', 'category'));
     }
     public function update(Category $category, CategoryValidate $request)
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     }
     public function destroy(Category $category, Request $request)
     {
-      $category->delete($data);
+      $category->delete();
       return redirect()->route('categories.index');
     }
 }
