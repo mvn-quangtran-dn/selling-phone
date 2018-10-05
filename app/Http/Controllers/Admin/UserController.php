@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ManageUser;
+use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\User;
 
@@ -32,7 +33,6 @@ class UserController extends Controller
         $roles = Role::all();
         return view('admin.users.create', compact('roles'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -43,6 +43,7 @@ class UserController extends Controller
     {
         $data = $request->all();
         User::create($data);
+        $request->session()->flash('status', 'Thêm người dùng thành công!');
         return redirect()->route('users.index');
     }
 
@@ -76,10 +77,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ManageUser $request, User $user)
+    public function update(Request $request, User $user)
     {
+
         $data = $request->all();
+        $data = $request->validate([
+            'username' => 'required',
+            'password' => 'required|min:6',
+            'yourname' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+        ],
+        [
+            'username.required' => 'Tên đăng nhập không được để trống',
+            'password.min' => 'Mật khẩu tối thiểu 6 kí tự',
+            'password.required' => 'Mật khẩu không được để trống',
+            'yourname.required' => 'Họ và tên không được để trống',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'address.required' => 'Địa chỉ không được để trống',        
+        ]
+        );
         $user->update($data);
+        $request->session()->flash('status', 'Chỉnh sửa thành công!');
         return redirect()->route('users.index');
     }
 
@@ -95,6 +114,7 @@ class UserController extends Controller
         // return redirect()->route('users.index');
         $user = User::findOrFail($request->user_id);
         $user->delete();
+        $request->session()->flash('status', 'Xóa thành công!');
         return redirect()->route('users.index');
     }
 }
