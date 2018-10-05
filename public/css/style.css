@@ -55,4 +55,11 @@ sup {
 	padding: 0 8px;
 }
 
-/*CSS Pagination*/
+.required label {
+    font-weight: bold;
+}
+.required label:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
+}

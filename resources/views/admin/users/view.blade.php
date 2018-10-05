@@ -16,10 +16,6 @@
 			<td>{{ $user->email }}</td>
 		</tr>
 		<tr>
-			<td><b>Mật khẩu</b></td>
-			<td>{{ $user->password }}</td>
-		</tr>
-		<tr>
 			<td class="text-center"><h2>Thông tin cá nhân</h2></td>
 			<td></td>
 		</tr>

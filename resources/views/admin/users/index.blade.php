@@ -1,7 +1,34 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container">
-	<a href="{{ route('users.create') }}" class="btn btn-xs btn-info" title="Xem thông tin"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm người dùng</i></a>
+<div class="container">	
+	@if (session('status'))
+        <div class="alert alert-info">{{session('status')}}</div>
+    @endif
+    <div class="">
+      <div class="tile">
+        <div class="tile-body">
+			<div class="row">
+				<div class="col-md-6">
+					<a href="{{ route('users.create') }}" class="btn btn-xs btn-info" title="Xem thông tin"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm người dùng</i></a>
+					<a href="{{ route('users.index'	) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
+				</div>
+				<div class="col-md-6">
+					<form action="" method="get">
+						<div class="row">
+				            <div class="form-group col-md-6">
+				              <input class="form-control" type="text" name="search" placeholder="Search ...">
+				            </div>
+				            <div class="form-group col-md-6 align-self-end">
+				              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-search"></i>Search</button>
+				            </div>
+			            </div>
+			        </form>
+				</div>
+			</div>
+	        
+        </div>
+      </div>
+    </div>
 	<table class="table table-light table-striped">
 		<thead>
 			<tr>
@@ -32,7 +59,7 @@
 
 		</tbody>
 	</table>
-	{!! $users->links() !!}
+	{{ $users->links() }}
 	<!-- Button trigger modal -->
 	<!-- Modal -->
 	<div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
