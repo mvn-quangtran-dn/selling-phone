@@ -21,6 +21,9 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin', 'middleware' => 'admin
 	Route::resource('/products', 'ProductController');
 	Route::resource('/orders', 'OrderController');
 	Route::resource('/users', 'UserController');
+	Route::get('/users/search/{key}', 'UserController@search')->name('users.search');
+	Route::get('/dashboard','PageController@dashboard')->name('admin.dashboard');
+	Route::resource('/comments', 'CommentController');
 });
 
 // Route login Admin

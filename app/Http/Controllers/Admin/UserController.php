@@ -117,4 +117,23 @@ class UserController extends Controller
         $request->session()->flash('status', 'Xóa thành công!');
         return redirect()->route('users.index');
     }
+
+    public function search(Request $request)
+    {
+        if($request->ajax()){
+            $output="";
+            $users = User::where('username','LIKE','%'.$request->search."%")->get();
+            if($users) {
+                foreach ($users as $key => $user) {
+                $output.='<tr>'.
+                '<td>'.$key.'</td>'.
+                '<td>'.$user->username.'</td>'.
+                '<td>'.$user->email.'</td>'.
+                '<td>'.$user->role_id.'</td>'.
+                '</tr>';
+                }
+            return Response($output);
+           }
+       }
+    }
 }
