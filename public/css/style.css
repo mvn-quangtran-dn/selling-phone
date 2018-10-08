@@ -38,7 +38,7 @@ body {
 	width: 600px;
 	margin: 0 auto;
 }
-.cart-content {
+/*.cart-content {
 	background: #fff;
 	padding: 10px;
 }
@@ -62,4 +62,13 @@ sup {
     color: #e32;
     content: ' *';
     display:inline;
+}
+*/
+
+.form-edit {
+  border: solid 1px #000; 
+  padding: 20px;
+}
+.border-right {
+  border-right: solid 1px red;
 }

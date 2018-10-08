@@ -1,5 +1,14 @@
 @extends('layouts.admin')
 @section('content')
+<div class="app-title">
+	<div>
+	  <h1><i class="fa fa-user"></i>&nbsp;Quản lý thông tin người dùng</h1>
+	</div>
+	<ul class="app-breadcrumb breadcrumb">
+	  <li class="breadcrumb-item"><i class="fa fa-user fa-lg"></i></li>
+	  <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Quản lý người dùng</a></li>
+	</ul>
+	</div>
 <div class="container">	
 	@if (session('status'))
         <div class="alert alert-info">{{session('status')}}</div>
@@ -13,13 +22,9 @@
 					<a href="{{ route('users.index'	) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
 				</div>
 				<div class="col-md-6">
-					<form action="" method="get">
 						<div class="row">
-				            <div class="form-group col-md-6">
-				              <input class="form-control" type="text" name="search" placeholder="Search ...">
-				            </div>
-				            <div class="form-group col-md-6 align-self-end">
-				              <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-search"></i>Search</button>
+				            <div class="form-group col-md-12">
+				              <input class="form-control" type="text" name="search" id="search" placeholder="Search ...">
 				            </div>
 			            </div>
 			        </form>
@@ -52,7 +57,7 @@
 				        <a href="{{ route('users.edit', $user) }}" class="btn btn-xs btn-info" title="Chỉnh sửa thông tin"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
 				        
 						<button class="btn btn-danger" data-userid={{ $user->id }} data-toggle="modal" data-target="#delete" title="Xóa người dùng"><i class="fa fa-trash-o"></i></button>
-					</td>
+					</td> 
 				</tr>
 				
 			@endforeach	
