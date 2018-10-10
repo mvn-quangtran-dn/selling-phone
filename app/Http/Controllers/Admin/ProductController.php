@@ -12,8 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->get();
-        //dd($products);
+        $products = Product::with('category', 'images')->get();
         return view('admin.products.index', compact('products'));
     }
     public function create()
@@ -21,13 +20,14 @@ class ProductController extends Controller
         $categories = Category::where('parent_id', '!=', "0")->get();
         return view('admin.products.create', compact('categories'));
     }
-    public function store(ProductValidate $request) //ProductValidate
+    public function store(ProductValidate $request)
     {
         $dataProducts = $request->all();        
         $dataProducts["code_product"] = date('d').date('m').date('Y').$request->get('name');        
         //dd($dataProducts);
         $product = Product::create($dataProducts);
-        if ($request->file('images')) {
+        if($product){
+            if ($request->file('images')) {
             foreach ($request->file('images') as $image) {
                 $image_name = date('d-m-Y').$image->getClientOriginalName();
                 $path = 'image';
@@ -37,20 +37,24 @@ class ProductController extends Controller
                     'product_id' => $product->id
                 ];
                 Image::create($dataImg);
+                }
             }
+            return redirect()->route('products.index')->with("success" , "Thêm sản phẩm thành công");
+        } else {
+            return redirect()->route('products.index')->with("fails" , "Thêm sản phẩm thành công");
         }
-
-        return redirect()->route('products.index');
     }
     public function show(Product $product) {
-        return view('admin.products.show', compact('product'));
+        $images = Image::where('product_id', "=", $product->id)->get();
+        return view('admin.products.show', compact('product', 'images'));
     }
     public  function edit(Product $product) {
         $categories = Category::where('parent_id', '!=', "0")->get();
-        $images = Image::get();
+        $images = Image::where('product_id', "=", $product->id)->get();
         return view('admin.products.edit', compact('product', 'categories', 'images'));
     }
-    public function destroy(CategoryValidate $product){
+    public function destroy(Product $product){
+        Image::where("product_id", $product->id)->delete();
         $product->delete();
         return redirect()->route('products.index');
     }

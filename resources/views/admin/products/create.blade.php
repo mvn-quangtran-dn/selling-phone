@@ -6,77 +6,77 @@
     {{ csrf_field() }}
     <div class="form-group">
       <label for="">Name</label>
-      <input type="text" name="name" class="form-control" value="">
+      <input type="text" name="name" class="form-control" value="{{ old('name') }}">
       @if($errors->has('name'))
         <p class="text-danger">{{$errors->first('name')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">CPU</label>
-      <input type="text" name="cpu" class="form-control" value="">
+      <input type="text" name="cpu" class="form-control" value="{{ old('name') }}">
       @if($errors->has('cpu'))
         <p class="text-danger">{{$errors->first('cpu')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Màn Hình</label>
-      <input type="text" name="screen" class="form-control" value="">
+      <input type="text" name="screen" class="form-control" value="{{ old('name') }}">
       @if($errors->has('screen'))
         <p class="text-danger">{{$errors->first('screen')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Hệ điều hành</label>
-      <input type="text" name="system" class="form-control" value="">
+      <input type="text" name="system" class="form-control" value="{{ old('name') }}">
       @if($errors->has('system'))
         <p class="text-danger">{{$errors->first('system')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Camera sau</label>
-      <input type="text" name="bcamera" class="form-control" value="">
+      <input type="text" name="bcamera" class="form-control" value="{{ old('name') }}">
       @if($errors->has('bcamera'))
         <p class="text-danger">{{$errors->first('bcamera')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Camera trước</label>
-      <input type="text" name="fcamera" class="form-control" value="">
+      <input type="text" name="fcamera" class="form-control" value="{{ old('name') }}">
       @if($errors->has('fcamera'))
         <p class="text-danger">{{$errors->first('fcamera')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Ram</label>
-      <input type="text" name="ram" class="form-control" value="">
+      <input type="text" name="ram" class="form-control" value="{{ old('name') }}">
       @if($errors->has('ram'))
         <p class="text-danger">{{$errors->first('ram')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Bộ nhớ trong</label>
-      <input type="text" name="rom" class="form-control" value="">
+      <input type="text" name="rom" class="form-control" value="{{ old('name') }}">
       @if($errors->has('rom'))
         <p class="text-danger">{{$errors->first('rom')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Thẻ nhớ ngoài</label>
-      <input type="text" name="smenory" class="form-control" value="">
+      <input type="text" name="smenory" class="form-control" value="{{ old('name') }}">
       @if($errors->has('smenory'))
         <p class="text-danger">{{$errors->first('smenory')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Dung lượng pin</label>
-      <input type="text" name="pin" class="form-control" value="">
+      <input type="text" name="pin" class="form-control" value="{{ old('name') }}">
       @if($errors->has('pin'))
         <p class="text-danger">{{$errors->first('pin')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Số lượng</label>
-      <input type="text" name="quantity" class="form-control" value="">
+      <input type="text" name="quantity" class="form-control" value="{{ old('name') }}">
       @if($errors->has('quantity'))
         <p class="text-danger">{{$errors->first('quantity')}}</p>
       @endif
@@ -84,14 +84,14 @@
 
     <div class="form-group">
       <label for="">Price</label>
-      <input type="text" name="price" class="form-control" value="">
+      <input type="text" name="price" class="form-control" value="{{ old('name') }}">
       @if($errors->has('price'))
         <p class="text-danger">{{$errors->first('price')}}</p>
       @endif
     </div>
     <div class="form-group">
       <label for="">Description</label>
-      <input type="text" name="description" class="form-control" value="">
+      <input type="text" name="description" class="form-control" value="{{ old('name') }}">
       @if($errors->has('description'))
         <p class="text-danger">{{$errors->first('description')}}</p>
       @endif

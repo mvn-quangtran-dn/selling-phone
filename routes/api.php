@@ -16,3 +16,50 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group(['namespace' => 'Admin\Api'], function(){
+	Route::get('/categories', [
+			'as' => "categories.index",
+			'uses' => "CategoryController@index"
+		]);
+	Route::get('/categories/search', [
+			'as' => 'categories.search',
+			'uses' => 'CategoryController@search'
+		]);
+	Route::get('/categories/remote', [
+			'as' => 'categories.remote',
+			'uses' => 'CategoryController@remote'
+		]);	
+	Route::post('/categories/createpost', [
+			'as' => 'categories.createpost',
+			'uses' => 'CategoryController@createpost'
+		]);
+	Route::get('/categories/printfe', [
+			'as' => 'categories.printfe',
+			'uses' => 'CategoryController@printfe'
+		]);
+	Route::get('/categories/phantrang', [
+			'as' => 'categories.phantrang',
+			'uses' => 'CategoryController@phantrang'
+		]);
+
+	Route::get('/products', [
+			'as' => 'products.index',
+			'uses' => 'ProductController@index'
+		]);
+	Route::get('/products/search', [
+			'as' => 'products.search',
+			'uses' => 'ProductController@search'
+		]);
+	Route::get('/products/remote', [
+			'as' => 'products.remote',
+			'uses' => 'ProductController@remote'
+		]);
+	Route::get('/products/showproduct', [
+			'as' => 'products.showproduct',
+			'uses' => 'ProductController@showproduct'
+		]);
+	Route::get('/orders/create_order', [
+			'as' => 'orders.create_order',
+			'uses' => 'OrderController@create_order'
+		]);
+});
