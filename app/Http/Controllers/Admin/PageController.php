@@ -11,4 +11,9 @@ class PageController extends Controller
     { 
     	return view('layouts.admin');
     }
+
+    public function dashboard()
+    {
+    	return view('admin.dashboard');
+    }
 }

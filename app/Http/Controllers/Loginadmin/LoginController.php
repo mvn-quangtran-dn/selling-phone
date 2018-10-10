@@ -19,8 +19,11 @@ class LoginController extends Controller
         $email = $request['email'];
     	$password = $request['password'];
     	if (Auth::attempt(['email' => $email, 'password' => $password]) && Auth::user()->role_id == 1){
-    		return redirect()->route('admin.index');
+            $request->session()->flash('status', 'Đăng nhập thành công!');
+    		return redirect()->route('admin.dashboard');
+
     	} else {
+            $request->session()->flash('error', 'Đăng nhập thất bại!');
     		return redirect()->route('admin.login');
     	}
     }

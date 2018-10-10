@@ -28,9 +28,13 @@
     <header>
         <div class="container">
             <div class="float-right login">
-                <a href="{{ route('users.login') }}">Login</a>
-                <a href="{{ route('users.logout') }}">Logout</a>
-                <a href="{{ route('users.register') }}">Register</a>
+                @if(Auth::check())
+                    Xin chao{{ Auth::user()->name }}<a href="{{ route('users.logout') }}">Logout</a>
+                @else
+                    <a href="{{ route('users.login') }}">Login</a>
+                    <a href="{{ route('users.logout') }}">Logout</a>
+                    <a href="{{ route('users.register') }}">Register</a>
+                @endif
             </div>
         </div>          
         <div class="clearfix"></div>

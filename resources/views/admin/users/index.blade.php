@@ -1,7 +1,39 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container">
-	<a href="{{ route('users.create') }}" class="btn btn-xs btn-info" title="Xem thông tin"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm người dùng</i></a>
+<div class="app-title">
+	<div>
+	  <h1><i class="fa fa-user"></i>&nbsp;Quản lý thông tin người dùng</h1>
+	</div>
+	<ul class="app-breadcrumb breadcrumb">
+	  <li class="breadcrumb-item"><i class="fa fa-user fa-lg"></i></li>
+	  <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Quản lý người dùng</a></li>
+	</ul>
+	</div>
+<div class="container">	
+	@if (session('status'))
+        <div class="alert alert-info">{{session('status')}}</div>
+    @endif
+    <div class="">
+      <div class="tile">
+        <div class="tile-body">
+			<div class="row">
+				<div class="col-md-6">
+					<a href="{{ route('users.create') }}" class="btn btn-xs btn-info" title="Xem thông tin"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm người dùng</i></a>
+					<a href="{{ route('users.index'	) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
+				</div>
+				<div class="col-md-6">
+						<div class="row">
+				            <div class="form-group col-md-12">
+				              <input class="form-control" type="text" name="search" id="search" placeholder="Search ...">
+				            </div>
+			            </div>
+			        </form>
+				</div>
+			</div>
+	        
+        </div>
+      </div>
+    </div>
 	<table class="table table-light table-striped">
 		<thead>
 			<tr>
@@ -25,14 +57,14 @@
 				        <a href="{{ route('users.edit', $user) }}" class="btn btn-xs btn-info" title="Chỉnh sửa thông tin"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
 				        
 						<button class="btn btn-danger" data-userid={{ $user->id }} data-toggle="modal" data-target="#delete" title="Xóa người dùng"><i class="fa fa-trash-o"></i></button>
-					</td>
+					</td> 
 				</tr>
 				
 			@endforeach	
 
 		</tbody>
 	</table>
-	{!! $users->links() !!}
+	{{ $users->links() }}
 	<!-- Button trigger modal -->
 	<!-- Modal -->
 	<div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
