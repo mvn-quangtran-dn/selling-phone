@@ -13,16 +13,21 @@
       </div>
   <?php endif ?>
   <div class="form-group">
-    <label for="">Name</label>
-    <input type="text" name="name" class="form-control" value="">
+    <label for="">Name *</label>
+    <input type="text" name="name" class="form-control" value="{{ old('name') }}" autofocus>
   </div>
   <div class="form-group">
-    <label for="">Parent</label>
+    <label for="">Parent *</label>
     <select class="form-control" name="parent_id">
       <option value="0">Menu</option>
-
       @foreach($categories as $category)
-      <option value="{{$category->id}}">{{$category->name}}</option>
+        <?php 
+          $selected = "";
+          if (old('parent_id') == $category->id) {
+              $selected = "selected";    
+          }
+        ?>
+      <option value="{{$category->id}}" {{$selected}}>{{$category->name}}</option>
       @endforeach
     </select>
   </div>

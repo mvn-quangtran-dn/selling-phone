@@ -5,45 +5,81 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Product;
 use Validator;
 use App\Http\Requests\CategoryValidate;
 
 class CategoryController extends Controller
 {
+    // Vào trang index
     public function index()
     {
-        $categories = Category::get();
+        $categories = Category::where("parent_id", "=", 0)->get();
         return view('admin.categories.index', compact('categories'));
     }
+    // View tới trang create
     public function create()
     {
         $categories = Category::get();
         return view('admin.categories.create', compact('categories'));
     }
+    // Tạo 1 danh mục 
     public function store(CategoryValidate $request)
     {
         $data = [
           'name' => $request->name,
           'parent_id' => $request->parent_id
         ];
-        Category::create($data);
-        return redirect()->route('categories.index');
+        if (Category::create($data)) {
+            return redirect()->route('categories.index')->with("success" , "Tạo thành công");
+        } else {
+            return redirect()->route('categories.index')->with("fails" , "Tạo thất bại");
+        }
+        
     }
+    // View tới trang edit
     public function edit(Category $category)
     {
         //dd($category);
         $categories = Category::get();
         return view('admin.categories.edit', compact('categories', 'category'));
     }
+    // Chỉnh sửa danh mục
     public function update(Category $category, CategoryValidate $request)
     {
         $data = $request->all();
-        $category->update($data);
-        return redirect()->route('categories.index');
+        if ($category->update($data)) {
+            return redirect()->route('categories.index')->with("success" , "Chỉnh sủa thành công");
+        } else {
+            return redirect()->route('categories.index')->with("fails" , "Chỉnh sủa thất bại");
+        }
     }
-    public function destroy(Category $category, Request $request)
+    // Xóa 1 danh mục
+    public function destroy(Category $category)
     {
-      $category->delete();
-      return redirect()->route('categories.index');
+        
+        if ($category->parent_id == 0) {
+            if (Category::where("parent_id" ,"=", $category->id)->count()) {
+               return redirect()->route('categories.index')->with("fails" , "Xóa Danh mục thất bại vì danh mục này đả có các trường con"); 
+            } else {
+                $category->delete();
+                return redirect()->route('categories.index')->with("success" , "Xóa Danh mục thành công");
+            }
+        } else {
+            if (Product::where("category_id", "=", $category->id)->count()) {
+                return redirect()->route('categories.index')->with("fails" , "Xóa Danh mục thất bại vì danh mục này đả có sản phẩm");
+            } else {
+                        $category->delete();
+                        return redirect()->route('categories.index')->with("success" , "Xóa Danh mục thành công");
+
+            }
+        }
     }
+    // Show danh mục con của Danh mục đó
+    public function show(Category $category)
+    {
+        $categories = Category::where('parent_id', "!=", 0)->paginate(5);
+        return view('admin.categories.show', compact('category'));
+    }
+    
 }

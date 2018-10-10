@@ -24,8 +24,8 @@ class ProductValidate extends FormRequest
     public function rules()
     {
         return [
-            "name" => "bail|required|min:6|max:50",
-            "cpu" => "bail|required|numeric",
+            "name" => "bail|required|min:6|max:50|unique:products,name,".$this->id,
+            "cpu" => "bail|required",
             "screen" => "bail|required|numeric",
             "system" => "bail|required",
             "bcamera" => "bail|required|numeric",
@@ -48,8 +48,8 @@ class ProductValidate extends FormRequest
             "name.alpha_dash" => "Tên của sản phẩm phải là chữ và số",
             "name.min" => "Tên sản phẩm không có độ dài nhỏ hơn :min",
             "name.max" => "Tên sản phẩm không có độ dài lớn hơn :max",
+            "name.unique" => "Tên sản phẩm không được trùng",
             "cpu.required" => "Trường CPU không được để trống",
-            "cpu.numeric" => "Trường CPU phải là số",
             "screen.required" => "Trường Màn Hình  không được để trống",
             "screen.numeric" => "Trường  Màn Hình phải là số",
             "system.required" => "Trường Hệ Điều Hành  không được để trống",
@@ -72,7 +72,7 @@ class ProductValidate extends FormRequest
             "images.images" => "Trường Hình ảnh phải là hình ảnh",
             "category_id.required" => "Trường Danh mục không được để trống",
             "category_id.numeric" => "Trường Danh mục phải là hình ảnh",
-
+            "images" => "Hình ảnh không được để trống",
         ];
     }
 }

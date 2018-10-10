@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        <h1>Add New Order</h1>
-            <form action="{{route('orders.store')}}" method="post">
+        <h1>Edit Order</h1>
+            <form action="{{route('orders.update', $order->id)}}" method="post">
                 {{ csrf_field() }}
+                <input type="hidden" name="_method" value="put">
                 <div class="row">
                     <div class="col-lg-8">
                     <div class="form-group">
@@ -11,16 +12,28 @@
                         <select name="user_id" id="user" class="form-control">
                             <option value="">Tên Khách Hàng</option>
                             @foreach($users as $user)
-                                <option value="{{$user->id}}">{{$user->username}}</option>
+                                <?php 
+                                    $selected = '';
+                                    if ($user->id == $order->user_id) {
+                                        $selected = "selected";
+                                    }
+                                 ?>
+                                <option value="{{$user->id}}" {{$selected}}>{{$user->username}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="">Order Status</label>
+                        <label for="">Order Status</label>                        
                         <select name="status_id" class="form-control">
                             <option value="">Status</option>
                             @foreach($statuses as $status)
-                                <option value="{{$status->id}}">{{$status->name}}</option>
+                                <?php 
+                                    $selected = '';
+                                    if ($status->id == $order->status_id) {
+                                     $selected = "selected";
+                                    }
+                                ?>
+                                <option value="{{$status->id}}" {{$selected}}>{{$status->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -43,21 +56,25 @@
                 <div class="col-lg-4">
                     <h3 class="text-center">Order Summary</h3>
                     <table class="table table-bordered" id="table_product">
-                        <tbody>
-                             <tr>
+                        <thead>
+                            <tr>
                                 <th id="productname">No Items Selected</th>
                             </tr>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td>Sub Total</td>
                                 <td>0</td>
-                            </tr>
+                            </tr>                            
+                        </tbody>
+                        <tfoot>
                             <tr>
                                 <td>Total</td>
                                 <td>0</td>
-                            </tr>                            
-                        </tbody>
+                            </tr>
+                        </tfoot>
                     </table>
-                    <input type="submit" value="Tạo Order" class="btn btn-primary">
+                    <input type="submit" value="Edit Order" class="btn btn-primary">
                 </div>
                 </div>
             </form>
@@ -83,11 +100,10 @@
                data: {id: id},
                success: function(data) {
                     console.log(data);
-                    //$('#productname').text(data.name);
+                    $('#productname').text(data.name);
                     print_screen(data, qtt);
                }
            }) 
-            
         }
         $('#qtt').change(function() {
             var qtt = parseInt($(this).val());
@@ -97,22 +113,17 @@
         function print_screen(data, qtt) {
             var html = '';
             var total = data.price * qtt;
-            html +=  '<tr id="name">';
-            html +=  '<td>' + data.name + '</td>';
-            html +=  '<td>' + data.price + '</td>';
-            html +=  '<div id="sub">';
-            html +=    '</div>';
-            html +=     '</tr>';
-            html +=    '<tr id="item">';
-            html +=    '<td>'+'Sub Total'+'</td>';
-            html +=    '<td>'+data.price+'</td>';
-            html +=   '</tr>';
-            html +=    '<tr id="total">';
-            html +=    '<td>'+'Total'+'</td>';
-            html +=     '<td>'+total+'</td>';
-            html +=    '</tr>';
-            console.log(html);
+            html = '<tr>'
+                + '<td>'+'Sub Total'+'</td>'
+                + '<td>'+data.price+'</td>'
+                +'</tr>';                 
+            footer = 
+                    '<tr>'
+                    +'<td>'+'Total'+'</td>'
+                    + '<td>'+total+'</td>'
+                    +'</tr>';
             $('tbody').html(html);
+            $('tfoot').html(footer);
         }
     });
 </script>
