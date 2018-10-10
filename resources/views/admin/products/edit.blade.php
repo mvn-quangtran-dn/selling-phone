@@ -123,10 +123,10 @@
         <p class="text-danger">{{$errors->first('category_id')}}</p>
       @endif
     </div>
-    @foreach($images as $image)
-      <img src="{{$image->name}}" alt="{{$product->name}}">
-    @endforeach
     <div class="form-group">
+      @foreach($images as $image)
+        <img src="{{url($image->name)}}" alt="{{$product->name}}" width="150px" height="200px">
+      @endforeach
       <input type="file" name="images[]" multiple value="">
       @if($errors->has('image'))
         <p class="text-danger">{{$errors->first('image')}}</p>

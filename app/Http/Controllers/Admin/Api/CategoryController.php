@@ -1,0 +1,162 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Api;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Category;
+use App\Product;
+use App\Http\Requests\CategoryValidate;
+use Validator;
+
+class CategoryController extends Controller
+{
+    public function index()
+    {
+    	$categories = Category::get();
+    	//dd($categories);
+    	return response()->json($categories, 200);
+    }
+    // ajax search 
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+    	$cid = $request->get('cid');
+        $categories = Category::where('parent_id', 0)->get();
+        if ($query != '') {
+                $data = Category::where("name", 'like', '%'.$query.'%')
+                                ->orwhere("parent_id", "like", '%'.$query.'%')->get();
+            } else {
+                $data = Category::where("parent_id", $cid)
+                                ->orderBy('id', 'desc')->get();
+            }
+            $total_row = $data->count();
+            
+            $output[] = "";
+            if ($total_row > 0) {
+                foreach ($data as $row) {
+                    $output[] = '
+                    <tr>
+                        <td>'.$row->id.'</td>
+                        <td>'.$row->name.'</td>
+                        <td>'."<a href=\"".$row->id."/edit"."\" class='update' id=\"".$row->id."\">".'<i class="ace-icon fa fa-pencil bigger-120"></i>'.'</a>'.'</td>
+                        <td>'."<button class=\"btn btn-danger\" data-id=\"".$row->id
+                        ."\" id=\"remote".$row->id."\" title=\"Xóa sản phẩm\">".'<i class="fa fa-trash-o">'.'</i>'.'</button>'
+                        .'</td>
+                    </tr>
+                    ';
+                }
+            }
+            else
+                {
+                    $output = '
+                    <tr>
+                        <td align="center" colspan="5">No Data Found</td>
+                    </tr>
+                ';
+            }
+
+            $data = [
+                'table_data' => $output,
+                'total_row' => $total_row,
+                'categories' => $categories,
+            ];
+            echo json_encode($data);
+    	   //return response()->json($data, 200);
+    }
+    // code ajax delete
+    public function remote(Request $request)
+    {
+        $id = $request->get('id');
+        $category = Category::find($id);
+        $products = Product::where('category_id', $category->id)->get();
+        if ($products->count() > 0) {
+            $data = "Không được xóa danh mục này vì danh mục này đả có sản phẩm";
+        } else {
+            if ($category->delete()) {
+                $data = 'Đả xóa danh mục thàng công';
+            } else {
+                $data = 'Xóa danh mục thất bại';
+            }
+        }
+        
+        echo json_encode($data);
+    }
+    // code ajax tạo danh mục
+    public function createpost(Request $request)
+    {
+        $data = $request->get('name');
+
+        $categories = Category::where('parent_id', "=", 0)->pluck('id')->toArray();
+        $validation = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20',
+            'parent_id' => [
+                'required',
+                function ($attribute, $value, $fail) use ($categories)  {
+                                if(!in_array($value, $categories)){
+                                    return $fail(" $attribute không tồn tại");
+                                } 
+                            },
+            ],
+        ],
+        [
+            'required' => 'Không được để trống :attribute',
+            'unique' => 'Không được để trùng :attribute',
+        ]);
+        $error_array = [];
+        $update = "";
+        $success_output = '';
+        if ($validation->fails()) {
+            foreach ($validation->errors()->all() as $value) {
+                $error_array = $value;
+            }
+        } else {
+            if ($request->get('button_action') == 'create') {
+                $data = [
+                    "name" => $request->get('name'),
+                    "parent_id" => $request->get('parent_id')
+                    ];
+                Category::create($data);
+                $success_output = '<div class="alert alert-success">Danh mục đả được tạo</div>';
+            }
+            if ($request->get('button_action') == 'update') {
+                $category = Category::find($request->get('id'));
+                $data = [
+                    'name' => $request->get('name'),
+                    'parent_id' => $request->get('parent_id')
+                ];               
+                $category->update($data);
+                $success_output = '<div class="alert alert-success">Danh mục đả được sửa</div>';
+                $update = "sua thanh cong";
+            }
+        }
+        
+        
+         $output = [
+            'success' => $success_output, 
+            'errors' => $error_array, 
+            'update' => $update         
+        ];
+        echo json_encode($output);        
+    }
+    // hiện khung khi edit
+    public function printfe(Request $request)
+    {
+        $categories = Category::where('parent_id', 0)->get();
+        $category = Category::find($request->id);
+        $data = [
+            'cid' => $category->id,
+            'name' => $category->name,
+            'parent_id' => $category->parent_id,
+            'categories' => $categories
+        ];
+        echo json_encode($data);
+    }
+    public function phantrang(Request $request)
+    {
+        $page = $request->get('page');
+        $data = Category::where("parent_id", "!=", 0)
+                                ->orderBy('id', 'desc')->paginate(5);
+        echo json_encode($data);
+    }
+}

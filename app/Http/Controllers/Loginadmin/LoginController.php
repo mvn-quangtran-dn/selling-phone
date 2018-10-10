@@ -15,7 +15,8 @@ class LoginController extends Controller
 
     public function showLogin(Request $request)
     {
-    	$email = $request['email'];
+    	//dd(bcrypt('123123'));
+        $email = $request['email'];
     	$password = $request['password'];
     	if (Auth::attempt(['email' => $email, 'password' => $password]) && Auth::user()->role_id == 1){
     		return redirect()->route('admin.index');

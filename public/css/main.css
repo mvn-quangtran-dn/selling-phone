@@ -41,7 +41,10 @@
   --font-family-sans-serif: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
-
+* {
+  padding: 0;
+  margin: 0;
+}
 *,
 *::before,
 *::after {
@@ -1615,7 +1618,7 @@ pre code {
     -webkit-box-ordinal-group: 10;
         -ms-flex-order: 9;
             order: 9;
-  }
+  }=
   .order-xl-10 {
     -webkit-box-ordinal-group: 11;
         -ms-flex-order: 10;
@@ -15235,6 +15238,52 @@ be a descendant of the grid when it is being dragged.
   color: #666;
 }
 
-.product-hidden {
+/*.product-hidden {
   display: none;
+}*/
+.images {
+    overflow: hidden;
+}
+.showProduct {
+    padding: 10px 12px;
+}
+.showProduct img {
+    height: 200px;
+    padding: 50px 25px;
+    float: left;
+}
+.cauhinh {
+    width: 70%;
+    margin: auto;
+    padding-top: 40px;
+    text-align: left;
+    font-size: 20px;
+}
+.showProduct h1 {
+    font-size: 40px;
+    color: black;
+}
+.showProduct h3 {
+    font-size: 35px;
+    color: black;
+}
+p.bg-success.text-white  {
+    padding: 20px 50px;
+}
+p.bg-danger.text-white {
+    padding: 20px 50px;
+}
+.searchForm {
+    width: 40%;
+    float: right;
+    margin: auto;
+    padding: 49px 15px 25px 36px;
+    transform: translateY(16px);
+}
+div#showerror {
+    padding-left: 54px;
+    transform: translateY(2px);
+}
+label::after {
+    content: " *";
 }

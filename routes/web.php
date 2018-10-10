@@ -10,15 +10,29 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::resource('admin/products', 'Admin\ProductController');
+// Route::resource('orders', 'OrderController');
+//Route::get('/', 'HomeController@index')->name('home.index');
 
-Route::get('/', 'HomeController@index')->name('home.index');
 
 // Auth::routes();
 
 Route::group(['prefix' => 'admin','namespace' => 'Admin', 'middleware' => 'admin-login'], function(){
 	Route::get('/', 'PageController@index')->name('admin.index');
 	Route::resource('/categories', 'CategoryController');
+	Route::get('/search', [
+		'as' => "category.search",
+		'uses' => "SearchController@search"
+	]);	
 	Route::resource('/products', 'ProductController');
+	Route::get('/orders/{order}/active', [
+			'as' => "orders.active",
+			'uses' => "OrderController@active"
+		]);
+	Route::get('/orders/{order}/payment', [
+			'as' => "orders.payment",
+			'uses' => "OrderController@payment"
+		]);
 	Route::resource('/orders', 'OrderController');
 	Route::resource('/users', 'UserController');
 });
