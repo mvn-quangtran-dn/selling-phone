@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="_token" content="{{ csrf_token() }}">
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
@@ -73,9 +74,14 @@
             <li><a class="treeview-item" href="{{ route('orders.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
-          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments-o"></i><span class="app-menu__label">Quản lý bình luận</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments-o"></i><span class="app-menu__label">Quản lý bình luận</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{ route('comments.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
+          </ul>
+        </li>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Quản lý Slide</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="{{ route('slides.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
       </ul>
@@ -88,29 +94,58 @@
     <script src="{{ url('js/popper.min.js') }}"></script>
     <script src="{{ url('js/bootstrap.min.js') }}"></script>
     <script src="{{ url('js/main.js') }}"></script>
+    <script src="{{ url('js/search.js') }}"></script>
     <!-- The javascript plugin to display page loading on top-->
     <!-- Page specific javascripts-->
-    <script>  
-      $('#delete').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) 
-        var user_id = button.data('userid') 
-        var modal = $(this)
-        modal.find('.modal-body #user_id').val(user_id);
-      })
+  <script>  
+    $('#delete').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      var user_id = button.data('userid') 
+      var modal = $(this)
+      modal.find('.modal-body #user_id').val(user_id);
+    })
   </script>
-  <script type="text/javascript">
-    $('#search').on('keyup',function(){
+<!--   <script type="text/javascript">
+    $('#search_user').on('keyup',function(){
+      $value=$(this).val();
           $.ajax({
           type : 'get',
           url : '{{URL::to('admin/users/search')}}',
-          data: {
-            'search': $('input[name=search]').val()
-          },
+          data:{'search':$value},
           success:function(data){
             $('tbody').html(data);
         }
       });
     })
+  </script> -->
+  <script>
+    $('#search_comment').on('keyup',function(){
+      var value=$(this).val();
+      console.log(value);
+        $.ajax({
+          type : 'get',
+          url : "{{URL::to('admin/comments/search')}}",
+          dataType: 'json',
+          data:{search: value},
+          success:function(data){
+            console.log(data);
+            print_search(data);
+          }    
+      });
+  })
+    function print_search(data) {
+      var html = "";
+      $.each(data, function(index, val) {
+        console.log(data.lenght);
+         html = '<tr>'
+          + '<td>' + val.id + '</td>'
+          +'</tr>';   
+      });
+        $('tbody').html(html);
+    }
+  </script>
+  <script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
   </script>
   </body>
 </html>

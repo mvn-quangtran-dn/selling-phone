@@ -26,10 +26,17 @@
 		    @endif
 		</div>
 		<div class="from-group required">
+			<label for="">Re password</label>
+			<input type="password" name="confirm_password" class="form-control" placeholder="Nhập Mật khẩu" value="{{ old('confirm_password') }}">
+			@if ($errors->has('confirm_password'))
+		        <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
+		    @endif
+		</div>
+		<div class="from-group required">
 			<label for="">Yourname</label>
 			<input type="text" name="yourname" class="form-control" placeholder="Họ và tên" value="{{ old('yourname') }}">
-			@if ($errors->has('email'))
-		        <span class="text-danger">{{ $errors->first('email') }}</span>
+			@if ($errors->has('yourname'))
+		        <span class="text-danger">{{ $errors->first('yourname') }}</span>
 		    @endif
 		</div>
 		<div class="from-group required">

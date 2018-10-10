@@ -27,7 +27,7 @@ class ManageUser extends FormRequest
     {
         return [
             'username' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             'yourname' => 'required',
             'phone' => 'required',
@@ -40,6 +40,9 @@ class ManageUser extends FormRequest
         return [
             'username.required' => 'Tên đăng nhập không được để trống',
             'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không đúng định dạng',
+            'email.max' => 'Số ký tự không vượt quá 255',
+            'email.unique' => 'Email không được trùng',
             'password.min' => 'Mật khẩu tối thiểu 6 kí tự',
             'password.required' => 'Mật khẩu không được để trống',
             'yourname.required' => 'Họ và tên không được để trống',

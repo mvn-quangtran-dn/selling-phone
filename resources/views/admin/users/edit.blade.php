@@ -16,11 +16,12 @@
 					@endif
 				</div>
 				<div class="from-group required">
+					<label for="">Email</label>
+					<input type="text" name="username" class="form-control"  value="{{ $user->username }}" disabled>
+				</div>
+				<div class="from-group required">
 					<label for="">Password</label>
-					<input type="password" name="password" class="form-control" placeholder="Nhập Mật khẩu" value="{{ $user->password }}">
-					@if ($errors->has('password'))
-						<span class="text-danger">{{ $errors->first('password') }}</span>
-					@endif
+					<input type="text" name="username" class="form-control"  value="{{ $user->username }}" disabled>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -50,7 +51,7 @@
 			</div>
 		</div>
 		
-		
+		<hr>
 		<div class="from-group">
 			<input type="submit" value="Chỉnh sửa" class="btn btn-primary">
 			<a href="{{ route('users.index') }}" class="btn btn-info"><i class="fa fa-hand-o-left">&nbsp;&nbsp;Quay lại</i></a>
