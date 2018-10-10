@@ -82,4 +82,11 @@ class CommentController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+    {
+        $id = $request->id;
+        $data['id'] = $id;
+        return view('admin.comments.search', $data);
+    }
 }

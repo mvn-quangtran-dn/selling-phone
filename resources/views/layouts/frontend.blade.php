@@ -1,66 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <!-- Twitter meta-->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:site" content="@pratikborsadiya">
-    <meta property="twitter:creator" content="@pratikborsadiya">
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vali Admin">
-    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme">
-    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
-    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Selling Phone</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ url('css/main.css') }}">
-    <!-- Style CSS  -->
-    <link rel="stylesheet" type="text/css" href="{{ url('css/style.css') }}">
-    <!-- Font-icon css-->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
-  <body>
-    <header>
-        <div class="container">
-            <div class="float-right login">
-                @if(Auth::check())
-                    Xin chao{{ Auth::user()->name }}<a href="{{ route('users.logout') }}">Logout</a>
-                @else
-                    <a href="{{ route('users.login') }}">Login</a>
-                    <a href="{{ route('users.logout') }}">Logout</a>
-                    <a href="{{ route('users.register') }}">Register</a>
-                @endif
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<head>
+<title>Selling Phone</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href="{{ url('frontend/css/style.css') }}" rel="stylesheet" type="text/css" media="all"/>
+<link href="{{ url('frontend/css/slider.css') }}" rel="stylesheet" type="text/css" media="all"/>
+
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+        <div class="headertop_desc">
+            <div class="call">
+                 <p><span>Need help?</span> call us <span class="number">1-22-3456789</span></span></p>
             </div>
-        </div>          
-        <div class="clearfix"></div>
-        <nav class="menu">
-            <ul>
-                <li><a href="{{ route('home.index') }}">Trang chủ</a></li>
-                <li><a href="">Điện thoại</a></li>
-                <li><a href="">Tin tức</a></li>
-                <li><a href="">Liên hệ</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-      @yield('content')
-    </main>
-    <footer>
-        <p>© 2018. Công ty cổ phần Selling Phone</p>
-    </footer>
-    <!-- Essential javascripts for application to work-->
-    <script src="{{ url('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ url('js/popper.min.js') }}"></script>
-    <script src="{{ url('js/bootstrap.min.js') }}"></script>
-    <script src="{{ url('js/main.js') }}"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="{{ url('js/plugins/pace.min.js') }}"></script>
-    <!-- Page specific javascripts-->
-    <script type="text/javascript" src="{{ url('js/plugins/chart.js') }}"></script>
-  </body>
+            <div class="account_desc">
+                <ul>
+                    @if(Auth::check()) 
+                        <li>{{ Auth::user()->username }}</li>
+                        <li><a href="{{ route('users.logout') }}">Logout</a></li>        
+                    @else
+                        <li><a href="{{ route('users.register') }}">Register</a></li>
+                        <li><a href="{{ route('users.login') }}">Login</a></li>
+                    @endif  
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="header_top">
+            <div class="logo">
+                <a href="{{ route('home.index') }}"><img src="/frontend/images/logo.png" alt="" /></a>
+            </div>
+              <div class="cart">
+                   <p>Chào mừng bạn đến với Selling Phone Shop! <span>Giỏ hàng:</span><div id="dd" class="wrapper-dropdown-2"> 0 sản phẩm
+                    <ul class="dropdown">
+                            <li>you have no items in your Shopping cart</li>
+                    </ul></div></p>
+              </div>
+              <script type="text/javascript">
+            function DropDown(el) {
+                this.dd = el;
+                this.initEvents();
+            }
+            DropDown.prototype = {
+                initEvents : function() {
+                    var obj = this;
+
+                    obj.dd.on('click', function(event){
+                        $(this).toggleClass('active');
+                        event.stopPropagation();
+                    }); 
+                }
+            }
+
+            $(function() {
+
+                var dd = new DropDown( $('#dd') );
+
+                $(document).click(function() {
+                    // all dropdowns
+                    $('.wrapper-dropdown-2').removeClass('active');
+                });
+
+            });
+
+        </script>
+     <div class="clear"></div>
+  </div>
+    <div class="header_bottom">
+            <div class="menu">
+                <ul>
+                    <li class="active"><a href="{{ route('home.index') }}">Trang chủ</a></li>
+                    <li><a href="">Giới thiệu</a></li>
+                    <li><a href="">Danh sách sản phẩm</a></li>
+                    <li><a href="">Tin tức</a></li>
+                    <li><a href="">Liên hệ</a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="search_box">
+                <form>
+                    <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
+                </form>
+            </div>
+            <div class="clear"></div>
+         </div>      
+        @yield('content')
+        <div class="copy_right">
+            <p>&copy; 2018 Selling Phone. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+       </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url('frontend/js/jquery-1.7.2.min.js') }}"></script> 
+    <script type="text/javascript" src="{{ url('frontend/js/move-top.js') }}"></script>
+    <script type="text/javascript" src="{{ url('frontend/js/easing.js') }}"></script>
+    <script type="text/javascript" src="{{ url('frontend/js/startstop-slider.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {          
+            $().UItoTop({ easingType: 'easeOutQuart' });
+            
+        });
+    </script>
+    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+</body>
 </html>
+

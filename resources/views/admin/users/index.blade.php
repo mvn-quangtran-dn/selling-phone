@@ -17,14 +17,15 @@
       <div class="tile">
         <div class="tile-body">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<a href="{{ route('users.create') }}" class="btn btn-xs btn-info" title="Xem thông tin"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm người dùng</i></a>
 					<a href="{{ route('users.index'	) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
 						<div class="row">
 				            <div class="form-group col-md-12">
-				              <input class="form-control" type="text" name="search" id="search" placeholder="Search ...">
+				              <input class="form-control" type="text" name="search" id="search_user" placeholder="Search ...">
 				            </div>
 			            </div>
 			        </form>

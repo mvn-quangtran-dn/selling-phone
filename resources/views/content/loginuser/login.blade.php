@@ -62,6 +62,9 @@
         </form>
       </div>
     </section>
+    @if (session('error'))
+        <div class="alert alert-danger">{{session('error')}}</div>
+    @endif
     <!-- Essential javascripts for application to work-->
     <script src="{{ url('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ url('js/popper.min.js') }}"></script>
