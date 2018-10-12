@@ -8,9 +8,11 @@ use App\Product;
 use App\Category;
 use App\Order;
 use App\Comment;
+use Cart;
 
 class HomeController extends Controller
 {
+
     /**
      * Show the application dashboard.
      *
@@ -18,11 +20,35 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('content.index');
+        $categories = Category::where('parent_id', '=', 1)->get();
+        $new_products = Product::with('images')->orderBy('id','desc')->paginate(4);
+        return view('content.index', compact('categories', 'new_products'));
     }
 
-    public function product()
+    public function product($id)
     {
-    	return view('content.product');
+        $product = Product::with('images')->find($id);
+        $categories = Category::where('parent_id', '=', 1)->get();
+        return view('content.product', compact('product','categories'));
+    }
+    public function showAllProduct()
+    {
+        $products = Product::orderBy('id','desc')->paginate(12);
+        $categories = Category::where('parent_id', '=', 1)->get();
+        return view('content.showproduct', compact('categories', 'products'));
+    }
+    public function autocomplete(Request $request)
+    {
+        if ($request->get('query')) 
+        {
+            $query =  $request->get('query');
+            $products = Product::where('name', 'like', '%'.$query.'%')->get();
+        } 
+        echo json_encode($products);
+    }
+    public function checkorder()
+    {
+        $cart = Cart::content();
+        return view('content.order', compact('cart'));
     }
 }
