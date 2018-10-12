@@ -58,8 +58,20 @@ Route::group(['namespace' => 'Admin\Api'], function(){
 			'as' => 'products.showproduct',
 			'uses' => 'ProductController@showproduct'
 		]);
+	Route::post('/products/autocomplete', [
+			'as' => 'products.autocomplete',
+			'uses' => 'ProductController@autocomplete'
+		]);
 	Route::get('/orders/create_order', [
 			'as' => 'orders.create_order',
 			'uses' => 'OrderController@create_order'
+		]);
+	Route::post('/orders/action', [
+			'as' => 'orders.action',
+			'uses' => 'OrderController@action'
+		]);	
+	Route::post('/orders/remove', [
+			'as' => 'orders.remove',
+			'uses' => 'OrderController@remove'
 		]);
 });

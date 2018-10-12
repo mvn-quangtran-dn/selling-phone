@@ -4,7 +4,7 @@
     <div class="content">
         <div class="content_top">
             <div class="back-links">
-                <p><a href="{{ route('home.index') }}">Home</a>/<a href="{{ route('home.product') }}">Product</a></p>
+                <p><a href="{{ route('home.index') }}">Home</a>/<a href="{{ route('home.product', $product->id) }}">Product</a></p>
             </div>
             <div class="clear"></div>
         </div>
@@ -16,17 +16,19 @@
                             <div id="products_example">
                                 <div id="products">
                                     <div class="slides_container">
-                                        <a href="#" target="_blank"><img src="images/productslide-1.jpg" alt=" " /></a>
+                                        @foreach($product->images as $image)
+                                        <a href="#" target="_blank"><img src="{{url($image->name)}}" alt=" " /></a>
+                                        @endforeach      
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="desc span_3_of_2">
-                        <h2>Lorem Ipsum is simply dummy text </h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                        <h2>{{$product->name}}</h2>
+                        <p>{{$product->description}}</p>
                         <div class="price">
-                            <p>Price: <span>$500</span></p>
+                            <p>Price: <span>{{$product->price}}</span></p>
                         </div>
                         <div class="share-desc">
                             <!-- <div class="share">
@@ -53,7 +55,7 @@
                             </li>
                             
                             
-                            <li><h3>Nhận xét Samsung Galaxy J6+</h3></li>
+                            <li><h3>Nhận xét {{$product->name}}</h3></li>
                             <hr>
                                 <div class="your-review">
                                     <form action="" method="post">
@@ -81,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <script type="text/javascript">
+                <!-- <script type="text/javascript">
                     $(document).ready(function() {
                         $('#horizontalTab').easyResponsiveTabs({
                             type: 'default', //Types: default, vertical, accordion           
@@ -89,7 +91,7 @@
                             fit: true // 100% fit in a container
                         });
                     });
-                </script>
+                </script> -->
                 <div class="content_bottom">
                     <div class="heading">
                         <h3>Related Products</h3>
@@ -138,18 +140,9 @@
             <div class="rightsidebar span_3_of_1">
                 <h2>CATEGORIES</h2>
                 <ul class="side-w3ls">
-                    <li><a href="#">Mobile Phones</a></li>
-                    <li><a href="#">Desktop</a></li>
-                    <li><a href="#">Laptop</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">Software</a></li>
-                    <li><a href="#">Sports &amp; Fitness</a></li>
-                    <li><a href="#">Footwear</a></li>
-                    <li><a href="#">Jewellery</a></li>
-                    <li><a href="#">Clothing</a></li>
-                    <li><a href="#">Home Decor &amp; Kitchen</a></li>
-                    <li><a href="#">Beauty &amp; Healthcare</a></li>
-                    <li><a href="#">Toys, Kids &amp; Babies</a></li>
+                    @foreach($categories as $category)
+                    <li><a href="{{route('categories.showproduct', $category->id)}}">{{$category->name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

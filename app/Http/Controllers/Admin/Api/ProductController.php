@@ -74,4 +74,13 @@ class ProductController extends Controller
         }
         echo json_encode($data);
     }
+    public function autocomplete(Request $request)
+    {
+        if ($request->get('query')) 
+        {
+            $query =  $request->get('query');
+            $products = Product::where('name', 'like', '%'.$query.'%')->get();
+        } 
+        echo json_encode($products);
+    }
 }
