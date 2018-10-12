@@ -44,9 +44,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function product(Product $product)
     {
-        //
+        //dd("aaa");
+        return view('content.product');
     }
 
     /**

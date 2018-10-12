@@ -13,8 +13,29 @@
 
 // Route frontend
 Route::get('/', 'HomeController@index')->name('home.index');
+
 Route::get('/product', 'HomeController@product')->name('home.product');
 Route::get('/contact', 'HomeController@contact')->name('home.contact');
+
+Route::get('/product/{id}', 'HomeController@product')->name('home.product');
+Route::get('home/showAllProduct', 'HomeController@showAllProduct')->name('home.showAllProduct');
+Route::get('home/{id}/showproduct', [
+	'as' => 'categories.showproduct',
+	'uses' => 'CategoryController@showproduct'
+]);
+Route::post('/autocomplete', [
+	'as' => 'home.autocomplete',
+	'uses' => 'HomeController@autocomplete'
+]);
+Route::post('/show_product/{id}', [
+	'as' => 'home.show_product',
+	'uses' => 'HomeController@show_product'
+]);
+Route::get('/checkorder', [
+	'as' => 'home.checkorder',
+	'uses' => 'HomeController@checkorder'
+]);
+
 
 // Route::resource('admin/products', 'Admin\ProductController');
 // Route::resource('orders', 'OrderController');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 use Validator;
 use App\Http\Request\CategoryValidate;
@@ -83,5 +84,13 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+    //showproduct
+    public function showproduct($id)
+    {
+        $products = Product::with('images','category')->where('category_id', $id)->get();
+        $category = Category::find($id);
+        $categories = Category::where('parent_id', '=', 1)->get();
+        return view('content.product_category', compact('products', 'categories','category'));
     }
 }
