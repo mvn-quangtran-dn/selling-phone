@@ -16,45 +16,30 @@
         </div>
         <div class="col-md-10"></div>
     </div>
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Tiêu đề</th>
-				<th>Tên sản phẩm</th>
-				<th>Tên người dùng</th>
-				<th>Trạng thái</th>
-				<td>Hành động</td>
-			</tr>
-		</thead>
-		@foreach($comments as $key => $comment)
-			<tbody>
-				<tr>
-					@if (session('error'))
-				        <div class="alert alert-danger">
-					        {{session('error')}}
-					    </div>
-				    @endif
-					<td>{{ $comment->id }}</td>
-					<td>{{ $comment->name }}</td>
-					<td>{{ $comment->product->name }}</td>
-					<td>{{ $comment->user->username }}</td>
-					@if(($comment->active === 1))
-						<td><i class="fa fa-check btn btn-success" aria-hidden="true"></i></td>		
-					@elseif(($comment->active === 2))
-						<td><i class="fa fa-times btn btn-danger" aria-hidden="true"></i></td>
-					@else
-						<td>Đang chờ duyệt</td>	
-					@endif 
-					<td>
-						<a href="{{ route('comments.show', $comment->id) }}" id="show" class="btn btn-info"><i class="fa fa-eye"></i></a>
-						<a href="{{ route('comments.approve', $comment->id) }}" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></a>
-						<a href="{{ route('comments.remove', $comment->id) }}" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></i></a>
-					</td>
-				</tr>
-			</tbody>
-		@endforeach
-	</table>
-	{{ $comments->links() }}
+	<div id="list-comment">
+		@include('admin.comments.search')
+	</div>
 </div>	
+    <script src="{{ url('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url('js/popper.min.js') }}"></script>
+    <script src="{{ url('js/bootstrap.min.js') }}"></script>
+<script>
+	$(document).ready(function() {
+		$('#search_comment').on('keyup',function(){
+		  	var value = $(this).val();
+			$.ajax({
+				type : 'get',
+				url:"{{ route('comments.search') }}",
+				data: {'search':value},
+				success:function(data){
+					console.log(data);
+					$('#list-comment').html(data);
+				},
+				error: function(error) {
+
+				}
+		  });
+		})    	
+	})	
+</script>
 @endsection

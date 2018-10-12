@@ -1,10 +1,4 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <head>
     <title>Selling Phone</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,7 +25,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="account_desc">
                 <ul>
                     @if(Auth::check()) 
-                        <li>{{ Auth::user()->username }}</li>
+                        <li>Xin chào {{ Auth::user()->yourname }}</li>
                         <li><a href="{{ route('users.logout') }}">Logout</a></li>        
                     @else
                         <li><a href="{{ route('users.register') }}">Register</a></li>
@@ -76,7 +70,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li><a href="">Giới thiệu</a></li>
                     <li><a href="{{ route('home.showAllProduct') }}">Danh sách sản phẩm</a></li>
                     <li><a href="">Tin tức</a></li>
-                    <li><a href="">Liên hệ</a></li>
+                    <li><a href="{{ route('home.contact') }}">Liên hệ</a></li>
                     <div class="clear"></div>
                 </ul>
             </div>
@@ -92,7 +86,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
          </div>   
         @yield('content')
         <div class="copy_right">
+
+            <p>&copy; 2018 Selling Phone. All rights reserved
+
             <p>&copy; 2018 Selling Phone. All rights reserved | Design by <a href="http://cloudzone.vn/">Hiển và Vân</a></p>
+
        </div>
     </div>
    <!--  <script type="text/javascript" src="{{ url('frontend/js/search.js') }}"></script>  -->

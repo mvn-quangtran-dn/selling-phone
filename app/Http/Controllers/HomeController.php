@@ -8,7 +8,11 @@ use App\Product;
 use App\Category;
 use App\Order;
 use App\Comment;
+
+use App\Slide;
+
 use Cart;
+
 
 class HomeController extends Controller
 {
@@ -20,9 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $slides = Slide::all();
+        $comments = Comment::where('active', '1')->get();
+        return view('content.index', compact('slides', 'comments'));
+
         $categories = Category::where('parent_id', '=', 1)->get();
         $new_products = Product::with('images')->orderBy('id','desc')->paginate(4);
         return view('content.index', compact('categories', 'new_products'));
+
     }
 
     public function product($id)
@@ -50,5 +60,10 @@ class HomeController extends Controller
     {
         $cart = Cart::content();
         return view('content.order', compact('cart'));
+    }
+
+    public function contact()
+    {
+        return view('content.contact');
     }
 }

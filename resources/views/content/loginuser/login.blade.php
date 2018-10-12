@@ -57,7 +57,8 @@
                     @endif
                 </div>
           <div class="form-group btn-container">
-            <button type="sumit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            <button type="sumit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>ĐĂNG NHẬP</button>
+            <a href="{{ route('users.register') }}" class="btn btn-primary btn-block">ĐĂNG KÝ</a>
           </div>
         </form>
       </div>

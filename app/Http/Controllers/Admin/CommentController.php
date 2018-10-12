@@ -11,7 +11,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-    	$comments = Comment::paginate(3);
+    	$comments = Comment::orderBy('id', 'desc')->paginate(3);
     	return view('admin.comments.index', compact('comments'));
     }
 
@@ -41,14 +41,18 @@ class CommentController extends Controller
     	return view('admin.comments.detail', compact('comment'));
     }	
 
+
+    public function create(Request $request)
+    {
+        $data = $request->all();
+        Comment::create($data);
+        return back();
+    }
+
     public function search(Request $request)
     {
-        if ($request->ajax()) {
-
-            $output = "";
-
-            $comments = DB::table('comments')->where('name', 'LIKE', '%'.$request->search."%")->get();
-            echo json_encode($comments);
-        }
-    }
+        $search = $request->search;
+        $comments = Comment::where('name', 'LIKE', "%$search%")->orderBy('id', 'desc')->paginate(3);
+        return view('admin.comments.search', compact('comments'));
+    }    
 }

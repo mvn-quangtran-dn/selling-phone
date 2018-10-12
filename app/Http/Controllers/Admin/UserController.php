@@ -118,13 +118,14 @@ class UserController extends Controller
         $data = $request->validate([
             'username' => 'required',
             'yourname' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
             'address' => 'required',
         ],
         [
             'username.required' => 'Tên đăng nhập không được để trống',
             'yourname.required' => 'Họ và tên không được để trống',
             'phone.required' => 'Số điện thoại không được để trống',
+            'phone.numeric' => 'Số điện thoại phải là ký tự số',
             'address.required' => 'Địa chỉ không được để trống',        
         ]
         );
@@ -156,20 +157,8 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-       if ($request->ajax()) {
-            $output = "";
-            $users = DB::table('users')->where('username', 'LIKE', '%'.$request->search."%")->get();
-            if($users) {
-                foreach ($users as $key => $user) {
-                $output.='<tr>'.
-                '<td>'.$key.'</td>'.
-                '<td>'.$user->username.'</td>'.
-                '<td>'.$user->email.'</td>'.
-                '<td>'.$user->role_id.'</td>'.
-                '</tr>';
-                }
-            return Response($output);
-           }
-       }
-    }
+        $search = $request->search;
+        $users = User::where('username', 'LIKE', "%$search%")->orderBy('id', 'desc')->paginate(5);
+        return view('admin.users.search', compact('users'));
+    } 
 }
