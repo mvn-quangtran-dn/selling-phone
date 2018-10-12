@@ -94,7 +94,6 @@
     <script src="{{ url('js/popper.min.js') }}"></script>
     <script src="{{ url('js/bootstrap.min.js') }}"></script>
     <script src="{{ url('js/main.js') }}"></script>
-    <script src="{{ url('js/search.js') }}"></script>
     <!-- The javascript plugin to display page loading on top-->
     <!-- Page specific javascripts-->
   <script>  
@@ -104,48 +103,6 @@
       var modal = $(this)
       modal.find('.modal-body #user_id').val(user_id);
     })
-  </script>
-<!--   <script type="text/javascript">
-    $('#search_user').on('keyup',function(){
-      $value=$(this).val();
-          $.ajax({
-          type : 'get',
-          url : '{{URL::to('admin/users/search')}}',
-          data:{'search':$value},
-          success:function(data){
-            $('tbody').html(data);
-        }
-      });
-    })
-  </script> -->
-  <script>
-    $('#search_comment').on('keyup',function(){
-      var value=$(this).val();
-      console.log(value);
-        $.ajax({
-          type : 'get',
-          url : "{{URL::to('admin/comments/search')}}",
-          dataType: 'json',
-          data:{search: value},
-          success:function(data){
-            console.log(data);
-            print_search(data);
-          }    
-      });
-  })
-    function print_search(data) {
-      var html = "";
-      $.each(data, function(index, val) {
-        console.log(data.lenght);
-         html = '<tr>'
-          + '<td>' + val.id + '</td>'
-          +'</tr>';   
-      });
-        $('tbody').html(html);
-    }
-  </script>
-  <script type="text/javascript">
-    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
   </script>
   </body>
 </html>

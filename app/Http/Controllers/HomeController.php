@@ -8,6 +8,7 @@ use App\Product;
 use App\Category;
 use App\Order;
 use App\Comment;
+use App\Slide;
 
 class HomeController extends Controller
 {
@@ -18,11 +19,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('content.index');
+        $slides = Slide::all();
+        $comments = Comment::where('active', '1')->get();
+        return view('content.index', compact('slides', 'comments'));
     }
 
     public function product()
     {
     	return view('content.product');
+    }
+
+    public function contact()
+    {
+        return view('content.contact');
     }
 }

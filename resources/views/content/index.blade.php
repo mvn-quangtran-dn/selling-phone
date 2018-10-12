@@ -22,22 +22,14 @@
  </div>
          <div class="header_bottom_right">                   
              <div class="slider">                        
-                 <div id="slider">
-                    <div id="mover">
-                        <div id="slide-1" class="slide">                                
-                         <div class="slider-img">
-                             <a href="preview.html"><img src="/frontend/images/slide-1-image.png" alt="learn more" /></a>                                     
-                          </div>
-                            <!-- <div class="slider-text">
-                             <h1>Clearance<br><span>SALE</span></h1>
-                             <h2>UPTo 20% OFF</h2>
-                           <div class="features_list">
-                            <h4>Get to Know More About Our Memorable Services Lorem Ipsum is simply dummy text</h4>                                        
-                            </div>
-                             <a href="preview.html" class="button">Shop Now</a>
-                           </div>     -->                      
-                          <div class="clear"></div>             
-                      </div>    
+                <div id="slider">
+                  <div id="mover">
+                    <div id="slide-1" class="slide">                                
+                       <div class="slider-img">
+                           <a href="preview.html"><img src="{{ url('images/slides/sl1.jpg') }}" alt="learn more" /></a>         
+                        </div>                      
+                        <div class="clear"></div>             
+                    </div>    
                         <div class="slide">
 <!--                                             <div class="slider-text">
                              <h1>Clearance<br><span>SALE</span></h1>
@@ -48,13 +40,13 @@
                              <a href="preview.html" class="button">Shop Now</a>
                            </div>  -->      
                              <div class="slider-img">
-                             <a href="preview.html"><img src="/frontend/images/slide-3-image.jpg" alt="learn more" /></a>
+                             <a href="preview.html"><img src="{{ url('images/slides/sl2.jpg') }}" alt="learn more" /></a>
                           </div>                                                                         
                           <div class="clear"></div>             
                       </div>
                       <div class="slide">                                     
                           <div class="slider-img">
-                             <a href="preview.html"><img src="frontend/images/slide-2-image.jpg" alt="learn more" /></a>
+                             <a href="preview.html"><img src="{{ url('images/slides/sl3.jpg') }}" alt="learn more" /></a>
                           </div>
                           <!-- <div class="slider-text">
                              <h1>Clearance<br><span>SALE</span></h1>
@@ -74,17 +66,65 @@
 <div class="clear"></div>
 </div>
 </div>
+<div class="product_desc">
+  <div id="horizontalTab">
+      <ul class="resp-tabs-list">
+          <li>
+              @if(!(Auth::check())) 
+                <p>Bạn vui lòng đăng nhập để nhận xét sản phẩm này</p>
+                <a href="{{ route('users.login') }}">Login</a>
+                <a href="{{ route('users.register') }}">Register</a>
+              @endif
+          </li>
+          
+          
+          <li><h3>Nhận xét Samsung Galaxy J6+</h3></li>
+          <hr>
+              <div class="your-review">
+                  <form action="{{ route('comments.create') }}" method="post">
+                      {{ csrf_field() }}
+                      <input type="hidden" name="product_id" value="1">
+                      <input type="hidden" name="user_id" value="5">
+                      <div>
+                          <span><label>Tiêu đề<span class="red">*</span></label></span>
+                          <span><input type="text" name="name" placeholder="Nhập tiêu đề ..."></span>
+                      </div>
+                      <div>
+                          <span><label>Nhận xét<span class="red">*</span></label></span>
+                          <span><textarea name="content"></textarea></span>
+                      </div>
+                      <div>
+                          <span><input type="submit" value="Gửi nhận xét"></span>
+                      </div>
+                  </form>
+              </div>
+              <hr>
+          <div class="clear"></div>
+      </ul>
+      <div class="resp-tabs-container">
+          <div class="review">
+              <h2>Khách hàng nhận xét</h2>
+              <hr>
+              @foreach($comments as $comment)
+                <h4>Bởi:{{ $comment->user->username }}</h4>
+                <p>{{ $comment->content }}</p>
+                <hr>
+              @endforeach  
+          </div>
+      </div>
+  </div>
+</div>
 <div class="main">
 <div class="content">
-<div class="content_top">
-    <div class="heading">
-    <h3>Điện thoại mới</h3>
-    </div>
-    <div class="see">
-        <p><a href="#">Xem tất cả</a></p>
-    </div>
-    <div class="clear"></div>
-</div>
+  <div class="content_top">
+      <div class="heading">
+      <h3>Điện thoại mới</h3>
+      </div>
+      <div class="see">
+          <p><a href="#">Xem tất cả</a></p>
+      </div>
+      <div class="clear"></div>
+  </div>
   <div class="section group">
         <div class="grid_1_of_4 images_1_of_4">
              <a href="{{ route('home.product') }}"><img src="frontend/images/feature-pic1.jpg" alt="" /></a>
@@ -142,14 +182,14 @@
         </div>
     </div>
     <div class="content_bottom">
-    <div class="heading">
-    <h3>Điện thoại nổi bật</h3>
-    </div>
-    <div class="see">
-        <p><a href="#">Xem tất cả</a></p>
-    </div>
-    <div class="clear"></div>
-</div>
+      <div class="heading">
+      <h3>Điện thoại nổi bật</h3>
+      </div>
+      <div class="see">
+          <p><a href="#">Xem tất cả</a></p>
+      </div>
+      <div class="clear"></div>
+  </div>
     <div class="section group">
         <div class="grid_1_of_4 images_1_of_4">
              <a href="preview.html"><img src="frontend/images/new-pic1.jpg" alt="" /></a>                    

@@ -14,7 +14,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return view('content.product', compact('comments'));
     }
 
     /**
@@ -83,10 +84,8 @@ class CommentController extends Controller
         //
     }
 
-    public function search(Request $request)
+    public function searchComment(Request $request)
     {
-        $id = $request->id;
-        $data['id'] = $id;
-        return view('admin.comments.search', $data);
+        //dd($request->all);
     }
 }
