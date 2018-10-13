@@ -15,9 +15,15 @@ use App\Mail\Sendmail;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')->get(); 
+        if($request->has('status')) {
+            $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')
+            ->where('status_id', $request->get('status') )->get(); 
+        } else {
+            $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')->get(); 
+            
+        }
         //dd($orders);
         return view('admin.orders.index', compact('orders'));
     }

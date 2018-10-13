@@ -14,6 +14,8 @@
     <script type="text/javascript" src="{{ url('frontend/js/startstop-slider.js') }}"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- bootstrap -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
   <div class="wrap">
@@ -42,10 +44,10 @@
               <div id="navbar-cart" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a id="cart-popover" class="btn" data-placement="bottom" title="Shopping Cart">
+                            <a id="cart-popover" class="btn" data-toggle="popover"  data-placement="bottom" title="Shopping Cart">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                                 <span class="badge"></span>
-                                <span class="total_price">0.00 đ</span>
+                                <span class="total_price">0.00 <sup>đ</sup></span>
                             </a>
                         </li>
                     </ul>
@@ -93,10 +95,12 @@
 
        </div>
     </div>
-   <!--  <script type="text/javascript" src="{{ url('frontend/js/search.js') }}"></script>  -->
+    <script type="text/javascript" src="{{ url('frontend/js/cart.js') }}"></script> 
    
     <script type="text/javascript">
-        $(document).ready(function() {          
+
+        $(document).ready(function() {
+            print_shopping(cart);                   
             $('#search').on('keyup', function() {
                 var query = $(this).val();
                 if (query != '') {
@@ -128,7 +132,8 @@
                 } 
                 $('#seacrchList').html(html);
             }
-            $(document).on('click', 'li', function() {
+            $(document).on('click', 'li', function(e) {
+                e.preventDefault();
                 console.log('da click');
                 $('#search').val($(this).text());  
                 $('#seacrchList').fadeOut(); 
@@ -140,69 +145,7 @@
                     return $('#popover_content_wrapper').html();                    
                 }
             });
-            $(document).on('click', '.add-cart', function(event) {
-                event.preventDefault();
-                var id = $(this).attr('id');
-                console.log(id);
-                var action = 'add';
-                var qtt = 1;
-                $.ajax({
-                    url: "{{route('orders.action')}}",
-                    type: 'post',
-                    dataType: 'json',
-                    data: {id: id, action: action,qtt: qtt},
-                    success: function(data) {
-                        print_shopping(data);
-                        alert("Sản phẩm đả được thêm vào giỏ hàng");
-                    }
-                })                
-            });
-            print_shopping();
-            function print_shopping(data = "") {
-                var html = '';
-                console.log(data);
-                html = '<div class="table-responsive" id="order_table"><table class="table table-bordered table-striped"><tr><th width="40%">Product Name</th><th width="10%">Quantity</th><th width="20%">Price</th><th width="15%">Total</th><th width="5%">Action</th></tr>';
-                if (data != null) {
-                   $.each(data, function(index, val) {
-                        html +='<tr>'
-                            + '<td>'+val.name+'</td>'
-                            + '<td>'+val.price+'</td>'
-                            + '<td>'+val.qty+'</td>'
-                            + '<td>'+123+'</td>'
-                            + '<td>'
-                                + '<button name="delete" class="btn btn-danger btn-xs delete" id="'+val.id+"\">Remove</button></td>"
-                        + '</tr>';
-                   });
-                } else {
-                    html += 
-                       '<tr>'
-                            +'<td colspan="5" align="center">'
-                                +'Your Cart is Empty!'
-                            +'</td>'
-                        +'</tr>';
-                }
-                $('#cart_details').html(html);
-            }
-            $(document).on('click', '.delete', function() {
-                var id = $(this).attr('id');
-
-                var action = 'remove';
-                if (confirm('Bạn có chắc chắn xóa sản phẩm này không')) {
-                    $.ajax({
-                        url: "{{route('orders.remove')}}",
-                        type: 'post',
-                        data: {id: id, action: action},
-                        success: function(data) {
-                            console.log(data);
-                            // print_shopping();
-                            // $('#cart-popover').popover('hide');
-                            alert("Sản phẩm đả được xóa khỏi giỏ hàng");
-                        }
-                    })                    
-                }
-            });
-
-        });
+        });        
     </script>
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>

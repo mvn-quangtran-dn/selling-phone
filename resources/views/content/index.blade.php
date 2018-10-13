@@ -75,7 +75,7 @@
                   <form action="{{ route('comments.create') }}" method="post">
                       {{ csrf_field() }}
                       <input type="hidden" name="product_id" value="1">
-                      <input type="hidden" name="user_id" value="5">
+                      <input type="hidden" name="user_id" value="1">
                       <div>
                           <span><label>Tiêu đề<span class="red">*</span></label></span>
                           <span><input type="text" name="name" placeholder="Nhập tiêu đề ..."></span>
@@ -141,8 +141,8 @@
                <div class="price-number">
                     <p><span class="rupees">{{$product->price}}</span></p>
                 </div>
-                        <div class="add-cart" id="{{$product->id}}">                              
-                            <h4><a href="preview.html">Add to Cart</a></h4>
+                        <div class="add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">                              
+                            <h4><a href="#">Add to Cart</a></h4>
                          </div>
                      <div class="clear"></div>
             </div>

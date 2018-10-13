@@ -24,14 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $slides = Slide::all();
         $comments = Comment::where('active', '1')->get();
-        return view('content.index', compact('slides', 'comments'));
 
         $categories = Category::where('parent_id', '=', 1)->get();
         $new_products = Product::with('images')->orderBy('id','desc')->paginate(4);
-        return view('content.index', compact('categories', 'new_products'));
+        return view('content.index', compact('categories', 'new_products','comments'));
 
     }
 
