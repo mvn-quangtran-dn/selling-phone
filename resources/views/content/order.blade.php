@@ -3,21 +3,28 @@
 @section('content')
 	<h1>List Order</h1>
 	<table class="table table-bordered table-striped">
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Price</th>
-			<th>Số lượng</th>
-			<th>Remove</th>
-		</tr>
-		@foreach($cart as $item)
-		<tr>
-			<td>{{$item->id}}</td>
-			<td>{{$item->name}}</td>
-			<td>{{$item->price}}</td>
-			<td>{{$item->qty}}</td>
-			<td><a href="{{route('home.remove')}}" class="btn btn-default">Remove</a></td>
-		</tr>
-		@endforeach
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Số lượng</th>
+				<th>Sub Total</th>
+				<th>Remove</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
 	</table>
+	<div>
+		<span class="text-danger">Total: </span>
+		<span id="totalcheckout"></span>
+	</div>
+	
+	<div id="orderError">
+		
+	</div>
+	<script type="text/javascript" src="{{ url('frontend/js/checkoutcart.js') }}"></script>
+
 @endsection

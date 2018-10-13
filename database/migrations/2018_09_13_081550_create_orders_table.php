@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('yourname');
             $table->integer('payment_id');//tra tien chua
-            $table->float('total');//Tong gia tien
+            $table->double('total');//Tong gia tien
             $table->string('email');
             $table->string('address');
             $table->string('phone');
