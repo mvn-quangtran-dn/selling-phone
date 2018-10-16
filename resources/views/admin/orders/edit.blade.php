@@ -7,7 +7,7 @@
                 <input type="hidden" name="_method" value="put">
                 <div class="row">
                     <div class="col-lg-8">
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label for="">Tên Khách Hàng</label>
                         <select name="user_id" id="user" class="form-control">
                             <option value="">Tên Khách Hàng</option>
@@ -22,7 +22,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <label for="">Order Status</label>                        
                         <select name="status_id" class="form-control">
                             <option value="">Status</option>
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     <div>
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label for="">Sản Phẩm</label>
                             <select name="product_id" class="form-control"  id="product">
                                 <option value="" id="">Chọn tên sản phẩm</option>
@@ -47,7 +47,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group required">
                             <label for="">Số lượng</label>
                             <input type="number" name="quantity" id="qtt" class="form-control" value="1">
                         </div>

@@ -6,18 +6,31 @@
 				<div class="col span_2_of_3">
 				  <div class="contact-form">
 				  	<h2>Contact Us</h2>
-					    <form>
+				  		@if (session('status'))
+					        <div class="alert alert-info" style="color:red" >{{session('status')}}</div>
+					    @endif
+					    <form action="{{ route('home.sendcontact') }}" method="post">
+					    	{{ csrf_field() }}
 					    	<div>
 						    	<span><label>Name</label></span>
-						    	<span><input type="text" class="textbox" ></span>
+						    	<span><input type="text" name="name" class="textbox" ></span>
+						    	@if($errors->has('name'))
+									<span class="text-danger">{{ $errors->first('name') }}</span>
+								@endif
 						    </div>
 						    <div>
 						    	<span><label>E-mail</label></span>
-						    	<span><input type="text" class="textbox"></span>
+						    	<span><input type="text" name="email" class="textbox"></span>
+						    	@if($errors->has('email'))
+									<span class="text-danger">{{ $errors->first('email') }}</span>
+								@endif
 						    </div>
 						    <div>
 						    	<span><label>Subject</label></span>
-						    	<span><textarea> </textarea></span>
+						    	<span><textarea name="content"></textarea></span>
+						    	@if($errors->has('content'))
+									<span class="text-danger">{{ $errors->first('content') }}</span>
+								@endif
 						    </div>
 						   <div>
 						   		<span><input type="submit" value="Submit"  class="myButton"></span>

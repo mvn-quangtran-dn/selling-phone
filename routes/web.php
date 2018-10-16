@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index')->name('home.index');
 
 Route::get('/product', 'HomeController@product')->name('home.product');
 Route::get('/contact', 'HomeController@contact')->name('home.contact');
+Route::post('/contact', 'HomeController@sendContact')->name('home.sendcontact');
 
 Route::get('/product/{id}', 'HomeController@product')->name('home.product');
 Route::get('home/showAllProduct', 'HomeController@showAllProduct')->name('home.showAllProduct');
@@ -70,11 +71,12 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin', 'middleware' => 'admin
 		Route::get('/approve/{id}', 'CommentController@approve')->name('approve');
 		Route::get('/remove/{id}', 'CommentController@remove')->name('remove');
 		Route::get('/show/{id}', 'CommentController@show')->name('show');
-		Route::post('create-comment','CommentController@create')->name('create');
 		Route::get('/search', 'CommentController@search')->name('search');
 	});
 	Route::resource('/slides', 'SlideController');
 });
+
+Route::post('create-comment','Admin\CommentController@create')->name('comments.create')->middleware('check-login');
 
 // Route login Admin
 Route::group(['prefix' => 'admin', 'namespace' => 'Loginadmin', 'as' => 'admin.'], function(){
@@ -95,23 +97,23 @@ Route::group(['prefix' => '/', 'namespace' => 'Loginuser', 'as' => 'users.'], fu
 Route::get('users/cart', [
 	'as' => 'users.cart',
 	'uses' => 'HomeController@cart'
-]);
+])->middleware('check-login');
 Route::get('home/showorder', [
 	'as' => 'home.showorder',
 	'uses' => 'HomeController@showorder'
-]);
+])->middleware('check-login');
 
 Route::post('home/orderdetail', [
 	'as' => 'home.orderdetail',
 	'uses' => 'HomeController@orderdetail'
-]);
+])->middleware('check-login');
 Route::get('home/action/{id}', [
 	'as' => 'home.action',
 	'uses' => 'HomeController@action'
-]);
+])->middleware('check-login');
 Route::get('order/kiemtradonhang/{id}', [
 	'as' => 'order.kiemtradonhang',
 	'uses' => 'OrderController@kiemtradonhang'
-]);
+])->middleware('check-login');
 // Fix loi
 Route::get('users/search', 'Admin\UserController@search')->name('users.search');

@@ -11,7 +11,15 @@
   </div>
 @endif
 <div class="container">
-  <h1>List Product</h1>
+<div class="app-title">
+  <div>
+    <h1><i class="fa fa-cube"></i>&nbsp;Quản lý thông tin sản phẩm</h1>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-cube fa-lg"></i></li>
+    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Quản lý sản phẩm</a></li>
+  </ul>
+</div>
   <a href="{{route('products.create')}}" class="btn btn-primary">Create</a>
   <div class="bg-danger text-white" id="showerror">
     </div>

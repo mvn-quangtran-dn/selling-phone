@@ -46,6 +46,7 @@ class CommentController extends Controller
     {
         $data = $request->all();
         Comment::create($data);
+        $request->session()->flash('status', 'Bình luận thành công!');
         return back();
     }
 

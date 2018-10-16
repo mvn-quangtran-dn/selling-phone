@@ -29,15 +29,20 @@ class HomeController extends Controller
 
         $categories = Category::where('parent_id', '=', 1)->get();
         $new_products = Product::with('images')->orderBy('id','desc')->paginate(4);
-        return view('content.index', compact('categories', 'new_products','comments'));
+        $highLights_products = Product::with('images')->orderBy('id','asc')->paginate(4);
+        return view('content.index', compact('categories', 'new_products', 'highLights_products','comments'));
 
     }
 
     public function product($id)
     {
-        $product = Product::with('images')->find($id);
+       $product = Product::with('images')->find($id);
+        $products = Product::where('id', '<>', $id)->orderBy('id', 'desc')->paginate(4);
         $categories = Category::where('parent_id', '=', 1)->get();
-        return view('content.product', compact('product','categories'));
+        $comments = Comment::where('product_id', '=', $id)
+                            ->where('active', '1')
+                            ->get();
+        return view('content.product', compact('product','categories', 'comments', 'products'));
     }
     public function showAllProduct()
     {
@@ -64,6 +69,31 @@ class HomeController extends Controller
     {
         return view('content.contact');
     }
+
+    public function sendContact(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|max:20',
+            'email' => 'required|email',
+            'content' => 'required',
+        ],
+        [
+            'name.required' => 'Tên đăng nhập không được để trống',
+            'name.max' => 'Tên đăng nhập không được quá 20 ký tự',
+            'email.required' => 'Email đăng nhập không được để trống',
+            'email.email' => 'Email phải đúng định dạng',
+            'content.required' => 'Mật khẩu không được để trống',  
+        ]
+        );
+        $input = $request->all();
+        Mail::send('content.email-contact', array('name'=>$input["name"],'email'=>$input["email"], 'content'=>$input['content']), function($message){
+            $message->to('doanvanvandvv@gmail.com', 'Visitor')->subject('Thông tin phản hồi!');
+        });
+        $request->session()->flash('status', 'Bạn đã gửi thông tin contact thành công!');
+        return redirect()->route('home.contact');
+    }
+    
+    
     public function cart()
     {
         $user = User::find(3);

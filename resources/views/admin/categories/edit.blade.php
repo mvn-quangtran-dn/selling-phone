@@ -14,12 +14,12 @@
   {{ csrf_field() }}
   <input type="hidden" name="_method" value="put">
   <input type="hidden" name="id" value="{{$category->id}}">
-  <div class="form-group">
-    <label for="">Name *</label>
+  <div class="form-group required">
+    <label for="">Name</label>
     <input type="text" name="name" class="form-control" value="{{$category->name}}">
   </div>
-  <div class="form-group">
-    <label for="">Parent *</label>
+  <div class="form-group required">
+    <label for="">Parent</label>
     <select class="form-control" name="parent_id">
       <option value="0">Menu</option>
       @foreach($categories as $parent)

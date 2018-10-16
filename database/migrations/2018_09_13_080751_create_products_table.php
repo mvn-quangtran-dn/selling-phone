@@ -29,7 +29,6 @@ class CreateProductsTable extends Migration
             $table->string('pin');
             $table->text('description');//Mô tả
             $table->double('price');
-            $table->string('code_product'); //mã sản phẩm
             $table->integer('quantity'); //số lượng sản phẩm
             $table->timestamps();
         });

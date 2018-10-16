@@ -74,4 +74,8 @@ Route::group(['namespace' => 'Admin\Api'], function(){
 			'as' => 'orders.remove',
 			'uses' => 'OrderController@remove'
 		]);
+	Route::get('/orders/checkqtt', [
+			'as' => 'orders.checkqtt',
+			'uses' => 'OrderController@checkqtt'
+		]);
 });

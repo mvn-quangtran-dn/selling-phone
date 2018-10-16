@@ -21,7 +21,9 @@
 					
 			        <a href="{{ route('users.edit', $user) }}" class="btn btn-xs btn-info" title="Chỉnh sửa thông tin"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
 			        
-					<button class="btn btn-danger" data-userid={{ $user->id }} data-toggle="modal" data-target="#delete" title="Xóa người dùng"><i class="fa fa-trash-o"></i></button>
+					@if($user->role_id === 2)
+						<button class="btn btn-danger" data-userid={{ $user->id }} data-toggle="modal" data-target="#delete" title="Xóa người dùng"><i class="fa fa-trash-o"></i></button>
+					@endif	
 				</td> 
 			</tr>				
 		</tbody>

@@ -22,8 +22,7 @@ class ProductController extends Controller
     }
     public function store(ProductValidate $request)
     {
-        $dataProducts = $request->all();        
-        $dataProducts["code_product"] = date('d').date('m').date('Y').$request->get('name');        
+        $dataProducts = $request->all();
         //dd($dataProducts);
         $product = Product::create($dataProducts);
         if($product){
