@@ -86,7 +86,9 @@
                 </div>   
             </div>
          </div>   
-        @yield('content')
+        <div id="content">
+            @yield('content')
+        </div>
         <div class="copy_right">
 
             <p>&copy; 2018 Selling Phone. All rights reserved
@@ -133,7 +135,7 @@
                 $('#seacrchList').html(html);
             }
             $(document).on('click', 'li', function(e) {
-                e.preventDefault();
+                //e.preventDefault();
                 console.log('da click');
                 $('#search').val($(this).text());  
                 $('#seacrchList').fadeOut(); 

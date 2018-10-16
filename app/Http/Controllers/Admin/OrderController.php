@@ -49,7 +49,6 @@ class OrderController extends Controller
             'address' => $user->address,
             'status_id' => $request->status_id,
             'total' => $total,
-            'date_order' => date('Y/m/d'),
             'payment_id' => 2,
         ];
         // data detail lưu vào order detail

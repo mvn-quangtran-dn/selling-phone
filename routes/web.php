@@ -90,7 +90,28 @@ Route::group(['prefix' => '/', 'namespace' => 'Loginuser', 'as' => 'users.'], fu
 	Route::get('/logout', 'LoginController@logout')->name('logout');
 	Route::get('/register', 'LoginController@register')->name('register');
 	Route::post('/register', 'LoginController@showRegister')->name('showregister');
-});
 
+});
+Route::get('users/cart', [
+	'as' => 'users.cart',
+	'uses' => 'HomeController@cart'
+]);
+Route::get('home/showorder', [
+	'as' => 'home.showorder',
+	'uses' => 'HomeController@showorder'
+]);
+
+Route::post('home/orderdetail', [
+	'as' => 'home.orderdetail',
+	'uses' => 'HomeController@orderdetail'
+]);
+Route::get('home/action/{id}', [
+	'as' => 'home.action',
+	'uses' => 'HomeController@action'
+]);
+Route::get('order/kiemtradonhang/{id}', [
+	'as' => 'order.kiemtradonhang',
+	'uses' => 'OrderController@kiemtradonhang'
+]);
 // Fix loi
 Route::get('users/search', 'Admin\UserController@search')->name('users.search');
