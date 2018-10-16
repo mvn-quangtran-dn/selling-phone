@@ -9,7 +9,15 @@
      <p class="bg-danger text-white">{{session("fails")}}</p> 
   </div>
 @endif
-<h1>List Category</h1>
+<div class="app-title">
+  <div>
+    <h1><i class="fa fa-th-list"></i>&nbsp;Quản lý thông tin danh mục sản phẩm</h1>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-th-list fa-lg"></i></li>
+    <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Quản lý danh mục</a></li>
+  </ul>
+</div>
 <a href="{{route('categories.create')}}" class="btn btn-primary">Create</a>
 <table class="table table-light table-striped" style="width:100%">
   <tr>

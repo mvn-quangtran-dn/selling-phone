@@ -39,13 +39,6 @@ class OrderController extends Controller
                 'qty' => 1,
                 'total' => $total,
             ];
-            if (isset($cart)) {
-                if () {
-                    # code...
-                }
-            } else {
-
-            }
             echo json_encode($cart);
         }
         
@@ -57,5 +50,11 @@ class OrderController extends Controller
         //Cart::remove($data);
         // $cart = Cart::content();
         echo json_encode($rowId);
+    }
+    public function checkqtt(Request $request)
+    {
+        $product = Product::find($request->id);
+        $data = $product->quantity;
+        echo json_encode($data);
     }
 }

@@ -10,7 +10,15 @@
     <p class="bg-danger text-white">{{session("fails")}}</p> 
 </div>
 @endif
-<h1 class="text-info">List Orders</h1>
+<div class="app-title">
+  <div>
+    <h1><i class="fa fa-cart-plus"></i>&nbsp;Quản lý thông tin đơn đặt hàng</h1>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-cart-plus fa-lg"></i></li>
+    <li class="breadcrumb-item"><a href="{{ route('orders.index') }}">Quản lý đơn đặt hàng</a></li>
+  </ul>
+</div>
 <a href="{{route('orders.create')}}" class="btn btn-primary">Create Order</a>
 <table class="table">
     <tr>

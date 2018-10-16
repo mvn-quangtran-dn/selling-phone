@@ -60,14 +60,14 @@ class CategoryController extends Controller
         
         if ($category->parent_id == 0) {
             if (Category::where("parent_id" ,"=", $category->id)->count()) {
-               return redirect()->route('categories.index')->with("fails" , "Xóa Danh mục thất bại vì danh mục này đả có các trường con"); 
+               return redirect()->route('categories.index')->with("fails" , "Xóa Danh mục thất bại vì danh mục này đã có các trường con"); 
             } else {
                 $category->delete();
                 return redirect()->route('categories.index')->with("success" , "Xóa Danh mục thành công");
             }
         } else {
             if (Product::where("category_id", "=", $category->id)->count()) {
-                return redirect()->route('categories.index')->with("fails" , "Xóa Danh mục thất bại vì danh mục này đả có sản phẩm");
+                return redirect()->route('categories.index')->with("fails" , "Xóa Danh mục thất bại vì danh mục này đã có sản phẩm");
             } else {
                         $category->delete();
                         return redirect()->route('categories.index')->with("success" , "Xóa Danh mục thành công");

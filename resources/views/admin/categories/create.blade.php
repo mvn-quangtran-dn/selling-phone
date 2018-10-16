@@ -12,11 +12,11 @@
         </ul>
       </div>
   <?php endif ?>
-  <div class="form-group">
+  <div class="form-group required">
     <label for="">Name</label>
     <input type="text" name="name" class="form-control" value="{{ old('name') }}" autofocus>
   </div>
-  <div class="form-group">
+  <div class="form-group required">
     <label for="">Parent</label>
     <select class="form-control" name="parent_id">
       <option value="0">Menu</option>

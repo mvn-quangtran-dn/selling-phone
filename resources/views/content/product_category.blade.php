@@ -27,7 +27,7 @@
                     <h2>{{$product->name}}</h2>
                     <div class="price-details">
                         <div class="price-number">
-                            <p><span class="rupees">{{$product->price}}</span></p>
+                            <p><span class="rupees price-red">{{$product->price}}đ</span></p>
                         </div>
                         <div class="add-cart">                              
                             <h4><a href="preview.html">Add to Cart</a></h4>

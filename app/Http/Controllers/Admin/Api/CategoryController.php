@@ -71,10 +71,10 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $products = Product::where('category_id', $category->id)->get();
         if ($products->count() > 0) {
-            $data = "Không được xóa danh mục này vì danh mục này đả có sản phẩm";
+            $data = "Không được xóa danh mục này vì danh mục này đã có sản phẩm";
         } else {
             if ($category->delete()) {
-                $data = 'Đả xóa danh mục thàng công';
+                $data = 'Đã xóa danh mục thàng công';
             } else {
                 $data = 'Xóa danh mục thất bại';
             }
@@ -117,7 +117,7 @@ class CategoryController extends Controller
                     "parent_id" => $request->get('parent_id')
                     ];
                 Category::create($data);
-                $success_output = '<div class="alert alert-success">Danh mục đả được tạo</div>';
+                $success_output = '<div class="alert alert-success">Danh mục đã được tạo</div>';
             }
             if ($request->get('button_action') == 'update') {
                 $category = Category::find($request->get('id'));
@@ -126,8 +126,8 @@ class CategoryController extends Controller
                     'parent_id' => $request->get('parent_id')
                 ];               
                 $category->update($data);
-                $success_output = '<div class="alert alert-success">Danh mục đả được sửa</div>';
-                $update = "sua thanh cong";
+                $success_output = '<div class="alert alert-success">Danh mục đã được sửa</div>';
+                $update = "Sửa thành công";
             }
         }
         
