@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
+use App\OrderDetail;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,6 +17,11 @@ class OrderController extends Controller
     public function index()
     {
         //
+    }  
+    public function kiemtradonhang($id)
+    {
+        $order = Order::with('orderDetail', 'status')->where('id', $id)->get();
+        $products = Product::get();
     }
 
     /**
