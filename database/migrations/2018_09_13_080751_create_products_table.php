@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('system');//Hệ điều hành
             $table->integer('fcamera');//Camera trước
             $table->integer('bcamera');//Camera sau
-            $table->integer('cpu');
+            $table->string('cpu');
             $table->integer('ram');
             $table->integer('rom');//Bộ nhớ trong
             $table->integer('smenory');//thẻ nhớ ngoài

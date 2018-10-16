@@ -26,7 +26,7 @@ class ProductValidate extends FormRequest
         return [
             "name" => "bail|required|min:6|max:50|unique:products,name,".$this->id,
             "cpu" => "bail|required",
-            "screen" => "bail|required|numeric",
+            "screen" => "bail|required",
             "system" => "bail|required",
             "bcamera" => "bail|required|numeric",
             "fcamera" => "bail|required|numeric",
@@ -51,9 +51,7 @@ class ProductValidate extends FormRequest
             "name.unique" => "Tên sản phẩm không được trùng",
             "cpu.required" => "Trường CPU không được để trống",
             "screen.required" => "Trường Màn Hình  không được để trống",
-            "screen.numeric" => "Trường  Màn Hình phải là số",
             "system.required" => "Trường Hệ Điều Hành  không được để trống",
-            "system.alpha_dash" => "Trường  Hệ Điều Hành phải là chữ và số",
             "bcamera.required" => "Trường Camera sau không được để trống",
             "bcamera.numeric" => "Trường Camera sau phải là số",
             "fcamera.required" => "Trường Camera trước không được để trống",
