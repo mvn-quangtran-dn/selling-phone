@@ -2108,3 +2108,35 @@ body {
     max-width: 100%;
     margin-bottom: 20px;
 }
+
+#formcheckout #subheading span{
+	display: inline-block;
+    position: relative;
+    padding: 0 17px;
+    top: -11px;
+    font-size: 16px;
+    color: #058;
+    background-color: #fff;
+}
+#formcheckout #subheading {
+	height: 0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+div#payment {
+    background: lightgreen;
+    border-color: red;
+    padding: 20px;
+    text-align: center;
+}
+#submit {
+    padding: 13px 15px !important;
+    margin: 12px 0;
+    padding: 10px 12px;
+}
+.success, .fails {
+	padding: 10px 12px;
+	margin: 10px 0;
+}

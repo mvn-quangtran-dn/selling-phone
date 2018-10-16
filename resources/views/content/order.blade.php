@@ -25,6 +25,9 @@
 	<div id="orderError">
 		
 	</div>
+	<div id="checkout">
+		<a href="{{route('users.cart')}}" class="btn btn-info">Tiến hành thanh toán</a>
+	</div>
 	<script type="text/javascript" src="{{ url('frontend/js/checkoutcart.js') }}"></script>
 
 @endsection
