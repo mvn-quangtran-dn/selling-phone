@@ -91,7 +91,7 @@
     </div>
     <div class="form-group required">
       <label for="">Description</label>
-      <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+      <textarea name="description" class="form-control ckeditor" value="{{ old('description') }}"></textarea>
       @if($errors->has('description'))
         <p class="text-danger">{{$errors->first('description')}}</p>
       @endif

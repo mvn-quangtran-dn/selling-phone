@@ -83,4 +83,10 @@ class ProductController extends Controller
     {
         //
     }
+    public function sosanh(Request $request)
+    {
+        $product = Product::find($request->pd_1);
+        $product2 = Product::find($request->pd_2);
+        return view('content.productcompare', compact('product', 'product2'));
+    }
 }

@@ -11,22 +11,37 @@
   </div>
 @endif
 <div class="container">
-<div class="app-title">
-  <div>
-    <h1><i class="fa fa-cube"></i>&nbsp;Quản lý thông tin sản phẩm</h1>
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-cube"></i>&nbsp;Quản lý thông tin sản phẩm</h1>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-cube fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Quản lý sản phẩm</a></li>
+    </ul>
   </div>
-  <ul class="app-breadcrumb breadcrumb">
-    <li class="breadcrumb-item"><i class="fa fa-cube fa-lg"></i></li>
-    <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Quản lý sản phẩm</a></li>
-  </ul>
-</div>
-  <a href="{{route('products.create')}}" class="btn btn-primary">Create</a>
-  <div class="bg-danger text-white" id="showerror">
-    </div>
-    <div class="timkiem">
-      <input type="text" id="q">
-      <button ><i class="fa fa-search btn btn-info" id="search"></i></button>
-    </div>
+  <div class="">
+    <div class="tile">
+      <div class="tile-body">
+        <div class="row">
+          <div class="col-md-4">
+            <a href="{{route('products.create')}}" class="btn btn-xs btn-info"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm sản phẩm</i></a>
+            <a href="{{ route('products.index' ) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <div class="timkiem">
+                  <input  class="form-control" type="text" id="q" placeholder="Search ...">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>      
+      </div>
+   </div>
+  </div>
   <table class="table table-light table-striped" id="timkiem" style="width:100%">
     <thead>
       <tr>
@@ -69,7 +84,6 @@
   </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{{url('js/confirm/jquery-confirm.js')}}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -77,7 +91,7 @@ $(document).ready(function() {
   //load ra màn hình tất cả sản phẩm
   load_products();
   //khi click vào search sẽ chạy ajax
-  $('#search').click(function() {
+  $('#q').change(function() {
     console.log('đả click');
     var query = $('#q').val();
     console.log(query);

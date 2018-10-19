@@ -56,7 +56,7 @@ function print_shopping(data = "") {
             $.each(data, function(index, val) {
                 itemc++;
                 total += val.subtotal;
-                html +='<tr>'
+                html +='<tr id="table-cart">'
                     + '<td>'+val.name+'</td>'
                     + '<td>'+val.qtt+'</td>'
                     + '<td>'+val.price+'</td>'
@@ -101,9 +101,10 @@ $(document).on('click','.delete', function() {
 $(document).on('click', '#clear_cart',function() {
     if (confirm("Bạn có chắc chắn xóa tất cả sản phẩm ra khỏi giỏ hàng không?")) {
         cart = [];
-        localStorage.setItem('cart',JSON.stringify(cart))
+        localStorage.setItem('cart',JSON.stringify(cart));
         $('#cart-popover').popover('hide');
         alert('Bạn đả xóa tất cả sản phẩm ra khỏi giỏ hàng');
+        $('.badge').text('0');
         print_shopping(cart);        
     }
 });

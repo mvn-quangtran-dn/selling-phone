@@ -9,7 +9,7 @@ class PageController extends Controller
 {
     public function index()
     { 
-    	return view('layouts.admin');
+    	return view('admin.dashboard');
     }
 
     public function dashboard()

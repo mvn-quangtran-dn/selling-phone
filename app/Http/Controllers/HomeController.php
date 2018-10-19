@@ -85,18 +85,34 @@ class HomeController extends Controller
             'content.required' => 'Mật khẩu không được để trống',  
         ]
         );
+
         $input = $request->all();
-        Mail::send('content.email-contact', array('name'=>$input["name"],'email'=>$input["email"], 'content'=>$input['content']), function($message){
-            $message->to('doanvanvandvv@gmail.com', 'Visitor')->subject('Thông tin phản hồi!');
+        // send mail admin
+        Mail::send('content.email.email-admin', array('name'=>$input["name"],'email'=>$input["email"], 'content'=>$input['content']), function($message){
+            $message->to('hienlt@cloudzone.vn', 'Visitor')->subject('Thông tin phản hồi!');
+        });
+
+        //send mail user
+        $data = [
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'content' =>$request->content
+        ];
+
+        // dd($data['email']);
+        Mail::send('content.email.email-user', $data, function($message) use ($data){
+            $message->from('hienlt@cloudzone.vn', 'Admin Selling phone');
+            $message->to($data['email']);
+            $message->subject('Thông tin phản hồi!');
         });
         $request->session()->flash('status', 'Bạn đã gửi thông tin contact thành công!');
         return redirect()->route('home.contact');
     }
     
     
-    public function cart()
+    public function cart($id)
     {
-        $user = User::find(3);
+        $user = User::find($id);
         return view('content.cart', compact('user'));
     }
     public function orderdetail(Request $request)
@@ -127,14 +143,20 @@ class HomeController extends Controller
                 'order_id' => $order->id     
             ]; 
             OrderDetail::create($data_order_detail);
+            $product = Product::find($pid);
+            $qtt = [
+                'quantity' => $product->quantity - $request->qtt[$key]
+            ];
+            $product->update($qtt);
         }
         Mail::to($data_order['email'])->send(new SendMailOrder($data_order, $data_product));
-        return redirect()->route('home.showorder')->with('success', 'Tạo Order thành công');
+        return redirect()->route('home.showorder', $request->user_id)->with('success', 'Tạo Order thành công');
     }
-    public function showorder()
+    public function showorder($id)
     {
+        
         $orders = Order::with('orderDetails', 'status', 'paymentstatus')
-                        ->where('user_id', 3)->paginate(10);
+                        ->where('user_id', $id)->paginate(10);
         return view('content.showorder', compact('orders'));
     }
     public function action($id)

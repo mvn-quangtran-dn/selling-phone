@@ -19,7 +19,20 @@
     <li class="breadcrumb-item"><a href="{{ route('orders.index') }}">Quản lý đơn đặt hàng</a></li>
   </ul>
 </div>
-<a href="{{route('orders.create')}}" class="btn btn-primary">Create Order</a>
+<div class="">
+    <div class="tile">
+      <div class="tile-body">
+        <div class="row">
+          <div class="col-md-4">
+            <a href="{{route('orders.create')}}" class="btn btn-xs btn-info"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Tạo đơn đặt hàng</i></a>
+            <a href="{{ route('orders.index' ) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4"></div>
+        </div>      
+      </div>
+   </div>
+</div>
 <table class="table">
     <tr>
         <th>ID</th>
@@ -32,7 +45,7 @@
     </tr>
     @foreach($orders as $order)
         <tr>
-            <td><a href="{{route('orders.edit', $order->id)}}">{{$order->id}}</a></td>
+            <td><a href="{{route('orders.show', $order->id)}}">{{$order->id}}</a></td>
             <td>{{$order->user['yourname']}}</td>
             <td>{{$order->total}}</td>
             <td>{{$order->paymentstatus['name']}}</td>
@@ -42,7 +55,7 @@
                 <?php endif ?>
                 <?php if ($order->status_id != 1): ?>
                     <a href="{{route('orders.active',$order->id)}}"class="btn btn-success">Active Status</a></td><?php endif ?>                
-            <td><button class="btn btn-danger" data-id="{{$order->id}}" title="Xóa người dùng"><i class="fa fa-trash-o"></i></button>
+            <td><button class="btn btn-danger" data-id="{{$order->id}}" title="Xóa đơn hàng"><i class="fa fa-trash-o"></i></button>
             </td>
         </tr>
     @endforeach

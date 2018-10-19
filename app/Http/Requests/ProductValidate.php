@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Product;
+use Validator;
+use Illuminate\Http\Request;
 
 class ProductValidate extends FormRequest
 {
@@ -22,7 +25,8 @@ class ProductValidate extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {   
+        $products = Product::pluck('id')->toArray();
         return [
             "name" => "bail|required|min:6|max:50|unique:products,name,".$this->id,
             "cpu" => "bail|required",
@@ -36,9 +40,8 @@ class ProductValidate extends FormRequest
             "pin" => "bail|required|numeric",
             "quantity" => "bail|required|numeric",
             "price" => "bail|required|numeric",
-            "description" => "bail|required|min:20|max:255",
+            "description" => "bail|required|min:20",
             "category_id" => "bail|required|numeric",
-            "images" => "bail|required",
         ];
     }
     public function messages()

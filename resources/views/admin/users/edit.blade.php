@@ -15,14 +15,6 @@
 						<span class="text-danger">{{ $errors->first('username') }}</span>
 					@endif
 				</div>
-				<div class="from-group required">
-					<label for="">Email</label>
-					<input type="text" name="username" class="form-control"  value="{{ $user->username }}" disabled>
-				</div>
-				<div class="from-group required">
-					<label for="">Password</label>
-					<input type="text" name="username" class="form-control"  value="{{ $user->username }}" disabled>
-				</div>
 			</div>
 			<div class="col-md-6">
 				<h2>Thông tin cá nhân</h2>

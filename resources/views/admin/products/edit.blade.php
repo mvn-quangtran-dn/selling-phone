@@ -14,6 +14,7 @@
       </div>
   <?php endif ?>
     <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="id" value="{{$product->id}}">
     <div class="form-group required">
       <label for="">Name</label>
       <input type="text" name="name" class="form-control" value="{{$product->name}}">
@@ -126,8 +127,9 @@
     <div class="form-group">
       @foreach($images as $image)
         <img src="{{url($image->name)}}" alt="{{$product->name}}" width="150px" height="200px">
+        <input type="file" name="images[]" multiple value="{{url($image->name)}}">
       @endforeach
-      <input type="file" name="images[]" multiple value="">
+      
       @if($errors->has('image'))
         <p class="text-danger">{{$errors->first('image')}}</p>
       @endif

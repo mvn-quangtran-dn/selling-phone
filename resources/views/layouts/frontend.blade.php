@@ -15,7 +15,7 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- bootstrap -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <div class="wrap">
@@ -46,8 +46,8 @@
                         <li>
                             <a id="cart-popover" class="btn" data-toggle="popover"  data-placement="bottom" title="Shopping Cart">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
-                                <span class="badge"></span>
-                                <span class="total_price">0.00 <sup>đ</sup></span>
+                                <span class="badge">0</span>
+                                <span class="total_price text-danger">0.00 <sup>đ</sup></span>
                             </a>
                         </li>
                     </ul>
@@ -81,8 +81,9 @@
                     <input autocomplete="off" type="text" name="country_name" id="search" class="form-control input-lg" placeholder="Tìm kiếm....." />
                      {{ csrf_field() }}
                 </form>
-                <div id="seacrchList">
-                        
+                <div class="live-search-results text-left z-top"> 
+                    <div class="autocomplete-suggestions" id="seacrchList">
+                    </div>
                 </div>   
             </div>
          </div>   
@@ -98,7 +99,6 @@
        </div>
     </div>
     <script type="text/javascript" src="{{ url('frontend/js/cart.js') }}"></script> 
-   
     <script type="text/javascript">
 
         $(document).ready(function() {
@@ -126,16 +126,14 @@
             function print_autocomplete(data) {
                 var html = '';
                 if (data.length > 0) {
-                    html += '<ul class="dropdown-menu" style="display:block; position:relative">';
                     $.each(data, function(index, val) {
-                        html += "<li><a href=\"product/"+val.id+"\">"+val.name+"</a></li>";
+                        html += "<div class=\"search-name\"><a href=\"product/"+val.id+"\">"+val.name+"</a></div>";
                     });
-                    html += '</ul>';
                 } 
                 $('#seacrchList').html(html);
             }
-            $(document).on('click', 'li', function(e) {
-                //e.preventDefault();
+            $('.live-search-results').on('hover', 'a' , function(e) {
+                e.preventDefault();
                 console.log('da click');
                 $('#search').val($(this).text());  
                 $('#seacrchList').fadeOut(); 

@@ -20,31 +20,67 @@
                                         <a href="#" target="_blank"><img src="{{url($image->name)}}" alt=" " /></a>
                                         @endforeach      
                                     </div>
+                                    <div class="price price-red">
+                                      <p>Giá: <span>{!!number_format($product->price,0,",",".") . 'đ'!!}</span> </p>
+                                    </div>
+                                    <div class="add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">                              
+                                      <h4><a href="#">Add to Cart</a></h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="desc span_3_of_2">
                         <h2>{{$product->name}}</h2>
-                        <p>{{$product->description}}</p>
-                        <div class="price price-red">
-                            <p>Price: <span>{{$product->price}}đ</span></p>
-                        </div>
                         <div class="share-desc">
-                            <!-- <div class="share">
-                                <p>Share Product :</p>
-                                <ul>
-                                    <li><a href="#"><img src="images/facebook.png" alt="" /></a></li>
-                                    <li><a href="#"><img src="images/twitter.png" alt="" /></a></li>
-                                </ul>
-                            </div> -->
-                            <div class="button"><span><a href="#">Add to Cart</a></span></div>
+                            <ul class="parameter">
+                              <li>
+                                <span>Màn Hình:</span>
+                                <div>{{$product->screen}}</div>
+                              </li>
+                              <li>
+                                <span>Hệ điều hành:</span>
+                                <div>{{$product->system}}</div>
+                              </li>
+                              <li>
+                                <span>Camera sau:</span>
+                                <div>{{$product->bcamera}} MB</div>
+                              </li>
+                              <li>
+                                <span>Camera trước:</span>
+                                <div>{{$product->fcamera}} MB</div>
+                              </li>
+                              <li>
+                                <span>CPU:</span>
+                                <div>{{$product->cpu}}</div>
+                              </li>
+                              <li>
+                                <span>Ram:</span>
+                                <div>{{$product->ram}} GB</div>
+                              </li>
+                              <li>
+                                <span>Bộ nhớ trong:</span>
+                                <div>{{$product->rom}} GB</div>
+                              </li>
+                              <li>
+                                <span>Thẻ nhớ:</span>
+                                <div>Hỗ trợ tối đa {{$product->smenory}} GB</div>
+                              </li>
+                              <li>
+                                <span>Pin:</span>
+                                <div>{{$product->pin}} mAh</div>
+                              </li>
+                            </ul>
+                            
                             <div class="clear"></div>
                         </div>
                     </div>
                     <div class="clear"></div>
                 </div>
-
+                <div class="description">
+                  <h2>Mô tả sản phẩm</h2>
+                  <p>{{$product->description}}</p>
+                </div>
                 <div class="product_desc">
                   <div id="horizontalTab">
                       <ul class="resp-tabs-list">
@@ -102,22 +138,25 @@
                     <div class="clear"></div>
                 </div>
                 <div class="section group">
-                  @foreach($products as $product)
+                  @foreach($products as $product2)
                     <div class="grid_1_of_4 images_1_of_4">
                       <a href="{{ route('home.product', $product->id) }}">
-                        @foreach($product->images as $image)
+                        @foreach($product2->images as $image)
                         <img src="{{url($image->name)}}" alt="product" height="150px" />
                         @endforeach
                       </a>
-                      <h2>{{$product->name}}</h2>
+                      <h2>{{$product2->name}}</h2>
                         <div class="price-details">
                            <div class="price-number">
-                                <p><span class="rupees price-red">{{$product->price}}đ</span></p>
+                                <p><span class="rupees price-red">{!!number_format($product2->price,0,",",".") . 'đ'!!}</span></p>
                             </div>
-                                    <div class="add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">                              
-                                        <h4><a href="#">Add to Cart</a></h4>
-                                     </div>
-                                 <div class="clear"></div>
+                        <div class="add-cart" id="{{$product2->id}}" data-name="{{$product2->name}}" data-price="{{$product2->price}}">                              
+                          <h4><a href="#">Add to Cart</a></h4>
+                        </div>
+                        <div class="sosanh">
+                          <a href="/products/compare?pd_1={{$product->id}}&pd_2={{$product2->id}}">So Sánh</a>
+                        </div>
+                        <div class="clear"></div>
                         </div>
                          
                     </div>
@@ -131,20 +170,6 @@
                     @foreach($categories as $category)
                     <li><a href="{{route('categories.showproduct', $category->id)}}">{{$category->name}}</a></li>
                     @endforeach
-                </ul>
-            </div>
-            <div class="rightsidebar span_3_of_1">    
-                <h2>Thông số kỹ thuật</h2>
-                <ul class="side-w3ls thong-so">
-                    <li>Màn hình: {{ $product->screen }}</li>
-                    <li>Hệ điều hành: {{ $product->system }}</li>
-                    <li>Camera sau: {{ $product->fcamera }}&nbsp;MP</li>
-                    <li>Camera trước: {{ $product->bcamera }}&nbsp;MP</li>
-                    <li>CPU: {{ $product->cpu }}</li>
-                    <li>RAM: {{ $product->ram }}&nbsp;GB</li>
-                    <li>Bộ nhớ trong: {{ $product->rom }}&nbsp;GB</li>
-                    <li>Thẻ nhớ: {{ $product->smenory }}&nbsp;GB</li>
-                    <li>Dung lượng pin: {{ $product->pin }}&nbsp;mAh</li>
                 </ul>
             </div>
         </div>

@@ -144,7 +144,8 @@ class UserController extends Controller
     {
         // $user->delete();
         // return redirect()->route('users.index');
-        if($order_id = Order::where('user_id', $request->user_id)->first()) {
+        $order_id = Order::where('user_id', $request->user_id)->first();
+        if($order_id) {
             $request->session()->flash('error', 'Không được xóa người dùng đang đặt hàng');
             return redirect()->route('users.index');
         } else {
