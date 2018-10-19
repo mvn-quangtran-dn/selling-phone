@@ -1,6 +1,16 @@
 @extends('layouts.frontend')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 @section('content')
+<div class="main">
+    <div class="content">
+        <div class="content_top">
+            <div class="back-links">
+                <p><a href="{{ route('home.index') }}">Home</a>/<a href="{{ route('home.checkorder') }}">List Order</a></p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
 	<div class="container">
 		<div id="title">
 			<h1>Kiểm tra thông tin</h1>
@@ -59,5 +69,15 @@
 			</div>			
 		</form>
 	</div>
+	
 <script type="text/javascript" src="{{ url('frontend/js/orderdetail.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#submit').on('click', function(event) {
+			console.log('da submit');
+			cart = [];
+        	localStorage.setItem('cart',JSON.stringify(cart));
+		});
+	});
+</script>
 @endsection

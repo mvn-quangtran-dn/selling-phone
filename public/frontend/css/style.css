@@ -334,7 +334,7 @@ body {
 .grid_1_of_4 {
 	display: block;
 	float: left;
-	margin: 1% 0 1% 1.6%;
+	margin: 1% 1.2% 1% 0%;
 	box-shadow: 0px 0px 3px rgb(150, 150, 150);
 	-webkit-box-shadow: 0px 0px 3px rgb(150, 150, 150);
 	-moz-box-shadow: 0px 0px 3px rgb(150, 150, 150);
@@ -382,7 +382,6 @@ body {
 	color:#383838;
 }
 .add-cart{
-	float:right;
 	display: inline-block;
 }
 .add-cart h4 a{
@@ -1934,10 +1933,16 @@ body {
 	
 }
 .glyphicon-shopping-cart:before {
-  content: "\E116";
+	font-family: 'FontAwesome';
+	content: "\f07a";
 }
 .glyphicon-trash:before {
-    content: "\e020";
+	font-family: 'FontAwesome';
+    content: "\f2ed";
+}
+.glyphicon-shopping-cart:before {
+	font-family: 'FontAwesome';
+  	content: "\f218";    
 }
 /*code css register*/
 .form-register {
@@ -2033,7 +2038,7 @@ body {
     left: 0;
     z-index: 1060;
     display: none;
-    max-width: 500px;
+    max-width: 700px;
     padding: 1px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
@@ -2221,4 +2226,149 @@ div#payment {
 
 .price-red {
 	color: red !important;
+	padding-left: 21px;
+}
+.live-search-results {
+    text-align: left;
+    color: rgb(17, 17, 17);
+    top: 105%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(255, 255, 255, 0.95);
+    position: absolute;
+}
+.z-top {
+    z-index: 9995;
+}
+.text-left {
+    text-align: left;
+}
+.autocomplete-suggestions {
+    max-height: 80vh;
+}
+.autocomplete-suggestion {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    padding: 10px 0.75em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.autocomplete-suggestion .search-name {
+    margin-top: -0.15em;
+    padding-left: 0.5em;
+}
+.share-desc li span {
+	display: table-cell;
+    width: 100px;
+    vertical-align: top;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #666;
+}
+.share-desc li div {
+	display: table-cell;
+    width: auto;
+    vertical-align: top;
+    padding: 6px 5px;
+    font-size: 14px;
+    color: #333;
+} 
+.share-desc li {
+	display: table;
+    background: #fff;
+    width: 100%;
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+} 
+
+.description {
+    padding: 2% 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.product_desc {
+    padding: 2% 0;
+}
+.product-details {
+	padding: 2% 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+div#checkout {
+    text-align: right;
+    padding: 2% 0;
+}
+tr#table-cart {
+    text-align: center;
+}
+.btn-danger {
+    color: #FFF;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.content_product {
+    padding: 2% 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.images.container {
+    padding: 2%;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.border_image {
+	border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+.price.price-red h3 {
+    padding-top: 20px;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+h2.sosanh {
+    text-transform: none;
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+#config {
+	padding: 2% 0;
+}
+.compare-table-title {
+    background: #eee;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+.desc.config {
+    width: 100%;
+}
+.config li span {
+	display: table-cell;
+    width: 20%;
+    vertical-align: top;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #666;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+.config li div {
+	display: table-cell;
+    width: 40%;
+    vertical-align: top;
+    padding: 6px 5px;
+    font-size: 14px;
+    color: #333;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);	
+}
+.config li {
+	display: table;
+    background: #fff;
+    width: 100%;
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+} 
+p.bg-success.text-white {
+    padding: 15px 12px;
 }

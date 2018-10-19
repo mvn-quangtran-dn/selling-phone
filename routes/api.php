@@ -25,6 +25,10 @@ Route::group(['namespace' => 'Admin\Api'], function(){
 			'as' => 'categories.search',
 			'uses' => 'CategoryController@search'
 		]);
+	Route::get('/categories/showcategory', [
+			'as' => 'categories.showcategory',
+			'uses' => 'CategoryController@showcategory'
+		]);
 	Route::get('/categories/remote', [
 			'as' => 'categories.remote',
 			'uses' => 'CategoryController@remote'

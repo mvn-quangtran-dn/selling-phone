@@ -76,10 +76,14 @@ class CategoryController extends Controller
         }
     }
     // Show danh mục con của Danh mục đó
-    public function show(Category $category)
+    public function showcategory($id)
     {
-        $categories = Category::where('parent_id', "!=", 0)->paginate(5);
-        return view('admin.categories.show', compact('category'));
+        $categories = Category::where('parent_id', $id)->get();
+        return view('admin.categories.show', compact('categories', 'id'));
     }
-    
+    public function showproducts($id)
+    {
+        $products = Product::with('images', 'category')->where('category_id', $id)->get();
+        return view('admin.categories.showproduct', compact('products'));
+    }
 }

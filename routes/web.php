@@ -36,7 +36,11 @@ Route::get('/checkorder', [
 	'as' => 'home.checkorder',
 	'uses' => 'HomeController@checkorder'
 ]);
-
+Route::get('products/compare', [
+	'as' => 'home.sosanh',
+	'uses' => 'ProductController@sosanh'
+]);
+//cellphone.com/products/compare?pd_1=1&pd_2=2
 
 // Route::resource('admin/products', 'Admin\ProductController');
 // Route::resource('orders', 'OrderController');
@@ -49,9 +53,13 @@ Route::get('/checkorder', [
 Route::group(['prefix' => 'admin','namespace' => 'Admin', 'middleware' => 'admin-login'], function(){
 	Route::get('/', 'PageController@index')->name('admin.index');
 	Route::resource('/categories', 'CategoryController');
-	Route::get('/search', [
-		'as' => "category.search",
-		'uses' => "SearchController@search"
+	Route::get('categories/{id}/showcategory', [
+		'as' => "category.showcategory",
+		'uses' => "CategoryController@showcategory"
+	]);	
+	Route::get('categories/{id}/showproducts', [
+		'as' => "category.showproducts",
+		'uses' => "CategoryController@showproducts"
 	]);	
 	Route::resource('/products', 'ProductController');
 	Route::get('/orders/{order}/active', [
@@ -94,11 +102,11 @@ Route::group(['prefix' => '/', 'namespace' => 'Loginuser', 'as' => 'users.'], fu
 	Route::post('/register', 'LoginController@showRegister')->name('showregister');
 
 });
-Route::get('users/cart', [
+Route::get('users/cart/{id}', [
 	'as' => 'users.cart',
 	'uses' => 'HomeController@cart'
 ])->middleware('check-login');
-Route::get('home/showorder', [
+Route::get('home/showorder/{id}', [
 	'as' => 'home.showorder',
 	'uses' => 'HomeController@showorder'
 ])->middleware('check-login');

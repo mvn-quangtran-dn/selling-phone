@@ -24,12 +24,8 @@ class CategoryController extends Controller
     	$cid = $request->get('cid');
         $categories = Category::where('parent_id', 0)->get();
         if ($query != '') {
-                $data = Category::where("name", 'like', '%'.$query.'%')
-                                ->orwhere("parent_id", "like", '%'.$query.'%')->get();
-            } else {
-                $data = Category::where("parent_id", $cid)
-                                ->orderBy('id', 'desc')->get();
-            }
+            $data = Category::where("name", 'like', '%'.$query.'%')
+                            ->orwhere("parent_id", "like", '%'.$query.'%')->get();
             $total_row = $data->count();
             
             $output[] = "";
@@ -54,14 +50,34 @@ class CategoryController extends Controller
                         <td align="center" colspan="5">No Data Found</td>
                     </tr>
                 ';
-            }
-
+                }
             $data = [
                 'table_data' => $output,
                 'total_row' => $total_row,
                 'categories' => $categories,
             ];
-            echo json_encode($data);
+        } else {
+            $data = Category::where("parent_id", $cid)
+                            ->orderBy('id', 'desc')->get();
+            foreach ($data as $row) {
+                $output[] = '
+                <tr>
+                    <td>'.$row->id.'</td>
+                    <td>'."<a href=\"categories/".$row->id."/showcategory\">".$row->name.'</a>'.'</td>
+                    <td>'."<a href=\"".$row->id."/edit"."\" class='update' id=\"".$row->id."\">".'<i class="ace-icon fa fa-pencil bigger-120"></i>'.'</a>'.'</td>
+                    <td>'."<button class=\"btn btn-danger\" data-id=\"".$row->id
+                    ."\" id=\"remote".$row->id."\" title=\"Xóa sản phẩm\">".'<i class="fa fa-trash-o">'.'</i>'.'</button>'
+                    .'</td>
+                </tr>
+                ';
+            }
+            $data = [
+            'table_data' => $output,
+            'categories' => $categories,
+            ];
+        }
+            
+        echo json_encode($data);
     	   //return response()->json($data, 200);
     }
     // code ajax delete
@@ -69,8 +85,11 @@ class CategoryController extends Controller
     {
         $id = $request->get('id');
         $category = Category::find($id);
+        $categories = Category::where('parent_id', $category->id)->get();
         $products = Product::where('category_id', $category->id)->get();
         if ($products->count() > 0) {
+            $data = "Không được xóa danh mục này vì danh mục này đã có sản phẩm";
+        } elseif ($categories) {
             $data = "Không được xóa danh mục này vì danh mục này đã có sản phẩm";
         } else {
             if ($category->delete()) {
@@ -152,11 +171,50 @@ class CategoryController extends Controller
         ];
         echo json_encode($data);
     }
-    public function phantrang(Request $request)
+    public function showcategory(Request $request)
     {
-        $page = $request->get('page');
-        $data = Category::where("parent_id", "!=", 0)
-                                ->orderBy('id', 'desc')->paginate(5);
+        $query = $request->get('query');
+        $cid = $request->get('cid');
+        $categories = Category::where('parent_id', 0)->get();
+        if ($query != '') {
+            $data = Category::where("name", 'like', '%'.$query.'%')
+                            ->orwhere("parent_id", "like", '%'.$query.'%')->get();
+        } else {
+            $data = Category::where("parent_id", $cid)
+                            ->orderBy('id', 'desc')->get();
+        }
+        $total_row = $data->count();
+            
+            $output[] = "";
+            if ($total_row > 0) {
+                foreach ($data as $row) {
+                    $output[] = '
+                    <tr>
+                        <td>'.$row->id.'</td>
+                        <td>'."<a href=\"/admin/categories/".$row->id."/showproducts\">".$row->name.'</a>'.'</td>
+                        <td>'."<a href=\"".$row->id."/edit"."\" class='update' id=\"".$row->id."\">".'<i class="ace-icon fa fa-pencil bigger-120"></i>'.'</a>'.'</td>
+                        <td>'."<button class=\"btn btn-danger\" data-id=\"".$row->id
+                        ."\" id=\"remote".$row->id."\" title=\"Xóa sản phẩm\">".'<i class="fa fa-trash-o">'.'</i>'.'</button>'
+                        .'</td>
+                    </tr>
+                    ';
+                }
+            }
+            else
+                {
+                    $output = '
+                    <tr>
+                        <td align="center" colspan="5">No Data Found</td>
+                    </tr>
+                ';
+                }
+            $data = [
+                'table_data' => $output,
+                'total_row' => $total_row,
+                'categories' => $categories,
+            ];
+            
         echo json_encode($data);
+           //return response()->json($data, 200);
     }
 }

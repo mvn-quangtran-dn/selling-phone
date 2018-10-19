@@ -106,4 +106,10 @@ class OrderController extends Controller
         $order->delete();
         return redirect()->route('orders.index')->with('success', 'Xóa Order thành công');
     }
+    public function show(Order $order)
+    {
+        $order_details = OrderDetail::with('product')->where('order_id', $order->id)->get();
+        $user = User::find($order->user_id);
+        return view('admin.orders.show', compact('order_details', 'order', 'user'));
+    }
 }

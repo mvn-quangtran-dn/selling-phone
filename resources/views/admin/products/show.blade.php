@@ -1,27 +1,78 @@
 @extends('layouts.admin')
 @section('content')
-<div class="showProduct">
-	<h1>Điện thoại {{$product->name}}</h1>
-	<div class="images">
-       @foreach($images as $image)
-        <img src="{{ url($image->name) }}" alt="{{$product->name}}">
-        @endforeach 
+<div class="showProduct container">
+    <div class="row">
+        <div class="col-6">
+            <div id="products_example">
+                <div id="products">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="slides_container images_3_of_2">
+                            @foreach($product->images as $image)
+                            <a href="#" target="_blank"><img src="{{url($image->name)}}" alt=" " /></a>
+                            @endforeach      
+                            </div>                    
+                        </div>
+                        <div class="col-12">
+                            <div class="price price-red text-center">
+                                <p>Giá: <span>{!!number_format($product->price,0,",",".") . ' đ'!!}</span> </p>
+                            </div> 
+                        </div>
+                    </div>                               
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <h2>{{$product->name}}</h2>
+            <div class="share-desc">
+                <ul class="parameter">
+                    <li>
+                        <span>Màn Hình:</span>
+                        <div>{{$product->screen}}</div>
+                    </li>
+                    <li>
+                        <span>Hệ điều hành:</span>
+                        <div>{{$product->system}}</div>
+                    </li>
+                    <li>
+                        <span>Camera sau:</span>
+                        <div>{{$product->bcamera}} MB</div>
+                    </li>
+                    <li>
+                        <span>Camera trước:</span>
+                        <div>{{$product->fcamera}} MB</div>
+                    </li>
+                    <li>
+                        <span>CPU:</span>
+                        <div>{{$product->cpu}}</div>
+                    </li>
+                    <li>
+                        <span>Ram:</span>
+                        <div>{{$product->ram}} GB</div>
+                    </li>
+                    <li>
+                        <span>Bộ nhớ trong:</span>
+                        <div>{{$product->rom}} GB</div>
+                    </li>
+                    <li>
+                        <span>Thẻ nhớ:</span>
+                        <div>Hỗ trợ tối đa {{$product->smenory}} GB</div>
+                    </li>
+                    <li>
+                        <span>Pin:</span>
+                        <div>{{$product->pin}} mAh</div>
+                    </li>
+                </ul>
+                            
+                <div class="clear"></div>
+            </div>
+        </div>
     </div>
-    <h3>Cấu hình sản phẩm</h3>
-    <div class="cauhinh">
-    	<p><strong>Màn hình:</strong> {{$product->screen}} inch</p>
-    	<p><strong>Hệ Điều Hành:</strong> {{$product->system}} inch</p>
-    	<p><strong>Camera sau:</strong> {{$product->bcamera}} MB</p>
-    	<p><strong>Camera trước:</strong> {{$product->fcamera}} MB</p>
-    	<p><strong>CPU:</strong> {{$product->cpu}}</p>
-    	<p><strong>RAM:</strong> {{$product->ram}} GB</p>
-    	<p><strong>Bộ nhớ trong:</strong> {{$product->rom}} GB</p>
-    	<p><strong>Thẻ nhớ:</strong> {{$product->smenory}} GB</p>
-    	<p><strong>Dung lượng pin:</strong> {{$product->pin}} mAh</p>
-    </div>
-    <h3>Mô tả sản phẩm</h3>
-    <div class="mota">
-    	{{$product->description}}
+    <div class="row">
+        <div class="description area_article area_articleFull">
+            <h2>Mô tả sản phẩm</h2>
+             {!! $product->description !!}
+        </div>
     </div>
 </div>
 @endsection

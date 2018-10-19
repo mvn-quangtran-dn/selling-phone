@@ -25,10 +25,12 @@
 <!--     <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}"> -->
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- plugin ckeditor -->
+    <script type="text/javascript" src="{{url('plugins/ckeditor/ckeditor.js')}}"></script>
   </head>
   <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="">Selling Phone</a>
+    <header class="app-header"><a class="app-header__logo" href="{{ route('admin.dashboard') }}">Selling Phone</a>
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
@@ -48,8 +50,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">Admin</p>
-          <p class="app-sidebar__user-designation">Manage</p>
+          <p class="app-sidebar__user-name">{{ Auth::user()->yourname }}</p>
+          <p class="app-sidebar__user-designation">{{ Auth::user()->role->name }}</p>
         </div>
       </div>
       <ul class="app-menu">
@@ -77,11 +79,6 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-comments-o"></i><span class="app-menu__label">Quản lý bình luận</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
             <li><a class="treeview-item" href="{{ route('comments.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
-          </ul>
-        </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-picture-o"></i><span class="app-menu__label">Quản lý Slide</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="{{ route('slides.index') }}"><i class="icon fa fa-circle-o"></i>Danh sách</a></li>
           </ul>
         </li>
       </ul>

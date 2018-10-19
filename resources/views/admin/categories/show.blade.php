@@ -17,7 +17,7 @@
 <div class="bg-danger text-white" id="showerror">
   
 </div>
-<input type="hidden" id="cid" name="cid" value="{{$category->id}}">
+<input type="hidden" id="cid" name="cid" value="{{$id}}">
 <table class="table table-light table-striped" id="category" style="width:100%">
   <thead>
     <tr>
@@ -77,7 +77,7 @@
       var cid = $('#cid').val();
       console.log(cid);
       $.ajax({
-          url: "{{route('categories.search')}}",
+          url: "{{route('categories.showcategory')}}",
           type: 'get',
           dataType:'json',
           data:{query:name,cid:cid},

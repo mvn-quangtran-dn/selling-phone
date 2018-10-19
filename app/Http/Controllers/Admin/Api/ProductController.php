@@ -24,7 +24,8 @@ class ProductController extends Controller
     {
     	$query = $request->get('query');
     	if ($query != '') {
-    		$products = Product::where('name', 'like', "%$query%")
+    		$products = Product::with('category', 'images')
+                                ->where('name', 'like', "%$query%")
     							->orwhere('price', 'like', "%$query%")
     							->orwhere('system', 'like', "%$query%")
     							->get();
@@ -45,7 +46,7 @@ class ProductController extends Controller
                         <td>'.$product->quantity.'</td>
                         <td>'.$product->price.'</td>
                         <td id="category">'.$product->category->name.'</td>
-                        <td>'."<a href=\"products"."/".$product->id."/edit"."\">".'<i class="ace-icon fa fa-pencil bigger-120"></i>'.'</a>'
+                        <td>'."<a href=\"products"."/".$product->id."/edit"."\" class=\"btn btn-info\">".'<i class="ace-icon fa fa-pencil bigger-120"></i>'.'</a>'
                             ."<button class=\"btn btn-danger\" title=\"Xóa sản phẩm\" data-id=\"".$product->id."\" id=\"delete".$key."\">".
                             "<i class=\"fa fa-trash-o\">".'</i>'.'</button>'
                         .'</td>

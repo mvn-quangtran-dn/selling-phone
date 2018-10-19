@@ -30,9 +30,12 @@
 					<td>Đang chờ duyệt</td>	
 				@endif 
 				<td>
+
 					<a href="{{ route('comments.show', $comment->id) }}" id="show" class="btn btn-info"><i class="fa fa-eye"></i></a>
-					<a href="{{ route('comments.approve', $comment->id) }}" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></a>
-					<a href="{{ route('comments.remove', $comment->id) }}" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></i></a>
+					@if(!($comment->active))
+						<a href="{{ route('comments.approve', $comment->id) }}" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></a>
+						<a href="{{ route('comments.remove', $comment->id) }}" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></i></a>
+					@endif
 				</td>
 			</tr>
 		</tbody>

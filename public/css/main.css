@@ -15248,7 +15248,7 @@ be a descendant of the grid when it is being dragged.
     padding: 10px 12px;
 }
 .showProduct img {
-    height: 200px;
+    height: 500px;
     padding: 50px 25px;
     float: left;
 }
@@ -15286,4 +15286,93 @@ div#showerror {
 }
 label::after {
     content: " *";
+}
+.share-desc li span {
+  display: table-cell;
+    width: 150px;
+    vertical-align: top;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #666;
+}
+.share-desc li div {
+  display: table-cell;
+    width: auto;
+    vertical-align: top;
+    padding: 6px 5px;
+    font-size: 14px;
+    color: #333;
+} 
+.share-desc li {
+  display: table;
+    background: #fff;
+    width: 100%;
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+} 
+
+.description {
+    padding: 2% 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.product_desc {
+    padding: 2% 0;
+}
+.product-details {
+  padding: 2% 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.images_3_of_2 {
+    width: 44.2%;
+    float: left;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+article {
+    display: block;
+    overflow: hidden;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    margin-top: 15px;
+    max-width: 750px;
+}
+article h2, article h3 {
+    display: block;
+    overflow: hidden;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.3em;
+    font-weight: bold;
+}
+article p {
+    display: block;
+    margin: 10px 0;
+}
+article a {
+    color: #50a8e3;
+}
+article img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-height: 584px;
+    margin: 10px auto;
+}
+.price-red {
+    color: red !important;
+}
+.price p {
+    font-size: 0.8125em;
+    padding: 20px 0;
+    color: #666;
+    vertical-align: top;
+}
+.price p span {
+    font-size: 3em;
+    font-family: 'ambleregular';
+    color: #CD1F25;
 }
