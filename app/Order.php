@@ -13,12 +13,11 @@ class Order extends Model
     {
         return $this->belongsTo('App\User');
     }
-    public function orderDetails()
+    public function orderdetails()
     {
         return $this->hasMany('App\OrderDetail');
     }
-    public function products()
-    {
+    public function products() {
         return $this->hasManyThrough('App\Product', 'App\OrderDetail', 'product_id', 'id', 'id');
     }
     public function status()

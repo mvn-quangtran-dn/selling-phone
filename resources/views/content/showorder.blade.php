@@ -1,7 +1,6 @@
 @extends('layouts.frontend')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 @section('content')
-
 <div class="main">
     <div class="content">
         <div class="content_top">
@@ -37,8 +36,10 @@
            					<td class="text-center">{{$order->status->name}}</td>
            					@if($order->status_id == 1)
            					<td class="text-center text-info">Active</td>
-           					@else
+           					@elseif($order->status_id == 2)
            					<td class="text-center"><a href="{{route('home.action', $order->id)}}" class="btn btn-danger">Cancer</a></td>
+                    @else
+                    <td class="text-center text-danger">Đang đợi duyệt</td>
            					@endif
            				</tr>
            			@endforeach

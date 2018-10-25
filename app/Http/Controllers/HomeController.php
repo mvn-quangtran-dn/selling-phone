@@ -167,4 +167,9 @@ class HomeController extends Controller
         Order::where('id', $id)->update($cancer);
         return redirect()->route('home.showorder')->with('success', 'Xóa order thành công');
     }
+    public function kiemtraorder($id)
+    {
+        $orders = Order::where('user_id', $id)->orderBy('id', 'desc')->get();
+        return redirect()->route('home.showorder', compact($orders));
+    }
 }

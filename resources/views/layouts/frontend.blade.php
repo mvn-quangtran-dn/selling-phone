@@ -47,7 +47,6 @@
                             <a id="cart-popover" class="btn" data-toggle="popover"  data-placement="bottom" title="Shopping Cart">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                                 <span class="badge">0</span>
-                                <span class="total_price text-danger">0.00 <sup>đ</sup></span>
                             </a>
                         </li>
                     </ul>
@@ -55,6 +54,9 @@
               <div id="popover_content_wrapper" style="display: none">
                     <span id="cart_details"></span>
                     <div align="right">
+                        @if(Auth::check()) 
+                            <a href="{{ route('home.showorder', Auth::user()->id) }}"><i class="oi oi-cart">Check order</i></a>
+                        @endif                        
                         <a href="{{route('home.checkorder')}}" class="btn btn-primary" id="check_out_cart">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Check out
                         </a>

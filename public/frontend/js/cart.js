@@ -77,8 +77,6 @@ function print_shopping(data = "") {
         if (itemc != 0) {
             $('.badge').text(itemc);
         }
-        htmltotal = '<span class="total_price">'+total+' <sup>đ</sup></span>';
-        $('.total_price').html(htmltotal);
         $('#cart_details').html(html);
 }
 $(document).on('click','.delete', function() {
