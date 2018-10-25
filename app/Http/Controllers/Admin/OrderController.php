@@ -12,6 +12,7 @@ use App\Promotion;
 use App\Status;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Sendmail;
+use App\Mail\CancelMail;
 
 class OrderController extends Controller
 {
@@ -19,10 +20,10 @@ class OrderController extends Controller
     {
         if($request->has('status')) {
             $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')
-            ->where('status_id', $request->get('status') )->get(); 
+                ->where('status_id', $request->get('status') )->get(); 
         } else {
-            $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')->get(); 
-            
+            $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')
+                    ->orderBy('id', 'desc')->get(); 
         }
         //dd($orders);
         return view('admin.orders.index', compact('orders'));
@@ -102,9 +103,35 @@ class OrderController extends Controller
     {
         $id = $request->get('id');
         $order = Order::find($id);
-        OrderDetail::where('order_id', $order->id)->delete();
-        $order->delete();
-        return redirect()->route('orders.index')->with('success', 'Xóa Order thành công');
+        $order_details = OrderDetail::where('order_id', $order->id)->get();
+        $user = User::find($order->user_id);
+        foreach ($order_details as $detail) {
+            $product = Product::find($detail->product_id);
+            $data_product[] = [
+                'name' => $product->name,
+                'quantity' => $detail->quantity,
+                'subtotal' => $product->price * $detail->quantity,        
+            ];
+        }
+        $data = [
+            'user_id' => $order->user_id,
+            'yourname' => $user->yourname,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'address' => $user->address,
+            'total' => $order->total,
+        ];
+        if ($order->payment_id == 1) {
+           return redirect()->route('orders.index')->with('success', 'Xóa đơn hàng thất bại vì đơn hàng đả trả tiền'); 
+        } else {
+            foreach ($order_details as $detail) {
+                $detail->delete();
+            }
+            $order->delete();
+            Mail::to($data['email'])->send(new CancelMail($data, $data_product));
+            return redirect()->route('orders.index')->with('success', 'Xóa đơn hàng thành công');
+        }
+        
     }
     public function show(Order $order)
     {

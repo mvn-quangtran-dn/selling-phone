@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Image;
+use App\Order;
+use App\OrderDetail;
+use App\Comment;
 
 class ProductController extends Controller
 {
@@ -30,13 +33,13 @@ class ProductController extends Controller
     							->orwhere('system', 'like', "%$query%")
     							->get();
     	} else {
-    		$products = Product::with('category', 'images')->orderBy('id', 'desc')->get();
+    		$products = Product::with('category', 'images')->orderBy('id', 'desc')->paginate(5);
     	}
         $total_product = $products->count();
         if ($total_product > 0) {
-            foreach ($products as  $product) {
+            foreach ($products as  $key => $product) {
                 $nameimage = "";
-                foreach ($product->images as $key => $image) {
+                foreach ($product->images as $image) {
                     $nameimage = $image->name;
                 }
                 $output[] = 
@@ -67,12 +70,18 @@ class ProductController extends Controller
     public function remote(Request $request)
     {
         $product = Product::find($request->id);
-        Image::where("product_id", $product->id)->delete();
-        if ($product->delete()) {
-            $data = "da xoa thanh cong";
+        $orders = OrderDetail::where('product_id', $product->id)->get();
+        $coments = Comment::where('product_id', $product->id)->get();
+        if ($orders->count() > 0) {
+            $data = "Xóa sản phẩm thất bạn. Sản phẩm đả nằm trong Order";
+        } elseif ($coments->count() > 0) {
+           $data = "Xóa sản phẩm thất bại. Sản phẩm này đả có coment";
         } else {
-            $data = "xoa that bai";
+            Image::where("product_id", $product->id)->delete();
+            $product->delete();
+            $data = "Xóa sản phẩm thành công";
         }
+        
         echo json_encode($data);
     }
     public function autocomplete(Request $request)

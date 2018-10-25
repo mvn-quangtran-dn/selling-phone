@@ -1981,6 +1981,7 @@ body {
 	
 .text-danger {
 	color: red !important;
+	font-size: 20px;
 }
 /*css bootstrap thêm vào*/
 .btn .badge {
@@ -2371,4 +2372,13 @@ h2.sosanh {
 } 
 p.bg-success.text-white {
     padding: 15px 12px;
+}
+span#cangiua {
+    padding-left: 57px;
+}
+div#tongtien {
+    float: right;
+}
+span#totalcheckout {
+    font-size: 30px;
 }

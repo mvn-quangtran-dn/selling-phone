@@ -32,11 +32,14 @@
       <div class="logo">
         <h1>Selling-Phone</h1>
       </div>
-      <div class="login-box">
+        @if (session('error'))
+            <div class="alert alert-danger">{{session('error')}}</div>
+        @endif
+      <div class="login-box">    
         <form class="login-form" action="{{ route('users.showlogin') }}" method="post">
             {{ csrf_field() }}
               <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
-              <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+              <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} required">
                 <label for="email" class="control-label">EMAIL</label>
                     <input id="email" type="email" class="form-control" name="email" value="" required autofocus>
                     @if ($errors->has('email'))
@@ -45,7 +48,7 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} required">
                     <label for="password" class="control-label">PASSWORD</label>
 
                     <input id="password" type="password" class="form-control" name="password" required>
@@ -63,9 +66,7 @@
         </form>
       </div>
     </section>
-    @if (session('error'))
-        <div class="alert alert-danger">{{session('error')}}</div>
-    @endif
+    
     <!-- Essential javascripts for application to work-->
     <script src="{{ url('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ url('js/popper.min.js') }}"></script>

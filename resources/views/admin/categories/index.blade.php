@@ -24,7 +24,7 @@
       <div class="tile-body">
         <div class="row">
           <div class="col-md-4">
-            <a id="create" class="btn btn-xs btn-info"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm danh mục</i></a>
+            <a id="create" class="btn btn-xs btn-info"><i class="ace-icon fa fa-plus bigger-120">&nbsp; &nbsp;Thêm danh mục</i></a>
             <a href="{{ route('categories.index' ) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
           </div>
           <div class="col-md-4"></div>

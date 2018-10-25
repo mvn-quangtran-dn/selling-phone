@@ -71,7 +71,7 @@
     <div class="row">
         <div class="description area_article area_articleFull">
             <h2>Mô tả sản phẩm</h2>
-             {!! $product->description !!}
+             {{ $product->description }}
         </div>
     </div>
 </div>

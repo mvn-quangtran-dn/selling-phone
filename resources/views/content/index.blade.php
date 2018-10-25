@@ -80,7 +80,7 @@
           <h2>{{$product->name}}</h2>
             <div class="price-details">
                <div class="price-number">
-                    <p><span class="rupees price-red">{!!number_format($product->price,0,",",".") . 'đ'!!}</span></p>
+                    <p><span class="rupees price-red" id="cangiua">{!!number_format($product->price,0,",",".") . 'đ'!!}</span></p>
                 </div>
                         <div class="add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">                              
                             <h4><a href="#">Add to Cart</a></h4>

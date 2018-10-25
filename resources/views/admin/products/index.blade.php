@@ -25,7 +25,7 @@
       <div class="tile-body">
         <div class="row">
           <div class="col-md-4">
-            <a href="{{route('products.create')}}" class="btn btn-xs btn-info"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm sản phẩm</i></a>
+            <a href="{{route('products.create')}}" class="btn btn-xs btn-info"><i class="ace-icon fa fa-plus bigger-120">&nbsp; &nbsp;Thêm sản phẩm</i></a>
             <a href="{{ route('products.index' ) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
           </div>
           <div class="col-md-4"></div>
@@ -54,11 +54,28 @@
     </tr>
     </thead>
     <tbody>
-      
+      @foreach($products as $product)
+      <tr>
+        @foreach($product->images as $image)
+        <td><img src="{{url($image->name)}}" width="50px" height="50px"></td>
+        @endforeach
+        <td>{{$product->name}}</td>
+        <td>{{$product->quantity}}</td>
+        <td>{{$product->price}}</td>
+        <td>{{$product->category->name}}</td>
+        <td>
+          <a href="{{route('products.edit', $product->id)}}" class="btn btn-info"><i class="ace-icon fa fa-pencil bigger-120"></i></a>
+          <button class="btn btn-danger" title="Xóa sản phẩm" data-id="{{$product->id}}" id="delete{{$product->id}}">
+            <i class="fa fa-trash-o"></i></button>
+        </td>
+      </tr>
+      @endforeach
     </tbody>
-    @foreach($products as $product)
-    @endforeach
+    
   </table>
+</div>
+<div class="paging">
+  {!! $products->links() !!}
 </div>
 <div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -88,8 +105,6 @@
 $(document).ready(function() {
 
   var token = $('meta[name="csrf-token"]').attr('content');
-  //load ra màn hình tất cả sản phẩm
-  load_products();
   //khi click vào search sẽ chạy ajax
   $('#q').change(function() {
     console.log('đả click');
@@ -112,9 +127,10 @@ $(document).ready(function() {
        }
     })
   }
-  $('#timkiem').on('click','#delete0', function() {
+  $('#timkiem').on('click','button', function() {
       var product = $(this);
       var id = product.attr("data-id");
+      console.log(id);
       $('#delete').modal('toggle');
       $('#xoasanpham').click(function() {
         console.log('da click vao xoa');
@@ -129,10 +145,9 @@ $(document).ready(function() {
           console.log(data);
           alert(data);
           load_products();
-        }
-      })
-          console.log("da xoa thanh cong");
-        });
+          }
+        })
+      });
   });
 });
 </script>

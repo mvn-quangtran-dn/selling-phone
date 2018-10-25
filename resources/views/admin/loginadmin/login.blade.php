@@ -32,17 +32,20 @@
       <div class="logo">
         <h1>Selling-Phone</h1>
       </div>
+        @if (session('error'))
+            <div class="alert alert-danger">{{session('error')}}</div>
+        @endif
       <div class="login-box">
         <form class="login-form" method="POST" action="">
             {{ csrf_field() }}
-            <div class="form-group">
+            <div class="form-group required">
                 <label for="email" class="control-label">E-Mail Address</label>
                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                 @if($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif
             </div>
-            <div class="form-group">
+            <div class="form-group required">
                 <label for="password" class="control-label">Password</label>
                 <input id="password" type="password" class="form-control" name="password" required>
                 @if($errors->has('password'))
@@ -55,9 +58,7 @@
         </form>
       </div>
     </section>
-    @if (session('error'))
-        <div class="alert alert-danger">{{session('error')}}</div>
-    @endif
+    
     <!-- Essential javascripts for application to work-->
     <script src="{{ url('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ url('js/popper.min.js') }}"></script>

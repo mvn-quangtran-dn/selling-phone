@@ -50,11 +50,17 @@
             <td>{{$order->total}}</td>
             <td>{{$order->paymentstatus['name']}}</td>
             <td>{{$order->status['name']}}</td>
-            <td><?php if ($order->payment_id != 1): ?>
-                    <a href="{{route('orders.payment',$order->id)}}"class="btn btn-info">Active Payment</a>
-                <?php endif ?>
-                <?php if ($order->status_id != 1): ?>
-                    <a href="{{route('orders.active',$order->id)}}"class="btn btn-success">Active Status</a></td><?php endif ?>                
+            <td>
+              <?php if ($order->status_id == 3): ?>
+                <p class="text-center text-danger">Cancel</p>
+              <?php endif ?>
+              <?php if ($order->payment_id != 1 && $order->status_id != 3): ?>
+                <a href="{{route('orders.payment',$order->id)}}"class="btn btn-info">Active Payment</a>
+              <?php endif ?>
+              <?php if ($order->status_id != 1 && $order->status_id != 3): ?>
+                <a href="{{route('orders.active',$order->id)}}"class="btn btn-success">Active Status</a>
+              <?php endif ?>
+            </td>                
             <td><button class="btn btn-danger" data-id="{{$order->id}}" title="Xóa đơn hàng"><i class="fa fa-trash-o"></i></button>
             </td>
         </tr>

@@ -26,9 +26,9 @@
 		<tbody>
 		</tbody>
 	</table>
-	<div>
+	<div id="tongtien">
 		<span class="text-danger">Total: </span>
-		<span id="totalcheckout"></span>
+		<span id="totalcheckout"></span> <sup>đ</sup>
 	</div>
 	
 	<div id="orderError">
@@ -45,12 +45,11 @@
 	<script type="text/javascript" src="{{ url('frontend/js/checkoutcart.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.table').on('change', '#soluong', function() {
+			$('.table').on('change', 'input', function() {
 				html = '';
-				var id = $(this).attr('data-id');
-				var qtt = parseInt($('#qtt').val());
-				var endqtt = parseInt($(this).attr('data-product'));
-				var totalqtt = qtt + endqtt;
+				var id = $(this).attr('id');
+				var qtt = parseInt($(this).val());
+				var endqtt = parseInt($(this).val());
 				console.log(qtt);
 				$.ajax({
 					url: "{{route('orders.checkqtt')}}",
@@ -59,14 +58,14 @@
 					data: {id: id},
 				success: function(data) {
 					console.log(data);
-					if (totalqtt < 1 || totalqtt > data ) {
+					if (qtt < 1 || qtt > data ) {
 						alert("Số lượng không được nhỏ hơn 0 hoặc lơn hơn "+data);
 						$('#qtt').val(endqtt);
 					} else {
 						$.each(cart, function(index, val) {
 		 					if (val.id == id) {
 		 						console.log('cong qtt len ' ,qtt);
-		 						val.qtt += qtt;
+		 						val.qtt = qtt;
 		 						val.subtotal = val.qtt * val.price;
 		 					}
 						});

@@ -20,9 +20,13 @@ class OrderController extends Controller
     }  
     public function kiemtradonhang($id)
     {
-        $order = Order::with('orderDetail', 'status')->where('id', $id)->get();
-        $products = Product::get();
-    }
+        
+        $orderdetails = OrderDetail::with('product', 'order')->where('order_id', $id)->get();
+        foreach ($orderdetails as $value) {
+            $total = $value->order->total;
+        }
+        return view('content.showorder_detail', compact('orderdetails', 'total'));
+    }    
 
     /**
      * Show the form for creating a new resource.

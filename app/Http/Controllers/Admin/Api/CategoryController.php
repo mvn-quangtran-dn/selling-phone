@@ -89,8 +89,8 @@ class CategoryController extends Controller
         $products = Product::where('category_id', $category->id)->get();
         if ($products->count() > 0) {
             $data = "Không được xóa danh mục này vì danh mục này đã có sản phẩm";
-        } elseif ($categories) {
-            $data = "Không được xóa danh mục này vì danh mục này đã có sản phẩm";
+        } elseif ($categories->count() > 0) {
+            $data = "Không được xóa danh mục này vì danh mục này đã có danh mục con";
         } else {
             if ($category->delete()) {
                 $data = 'Đã xóa danh mục thàng công';

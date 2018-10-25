@@ -9,63 +9,93 @@
       {{session("fails")}}
   </div>
 @endif
-<h1>List Category</h1>
-<a id="create" class="btn btn-info">Create</a>
-<div class="searchForm">
-  <input type="search" name="q" {{ old('q') }} id="q" autofocus>  
-</div>
-<div class="bg-danger text-white" id="showerror">
-  
-</div>
-<input type="hidden" id="cid" name="cid" value="{{$id}}">
-<table class="table table-light table-striped" id="category" style="width:100%">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-  
-  </tbody>
-</table>
-<!-- Modal tao -->
-<div id="modalcreate" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Thêm danh mục</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
+<div class="container">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-cube"></i>&nbsp;Quản lý thông tin danh mục</h1>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-cube fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Quản lý danh mục</a></li>
+    </ul>
+  </div>
+  <div class="">
+    <div class="tile">
+      <div class="tile-body">
+        <div class="row">
+          <div class="col-md-4">
+            <a id="create" class="btn btn-xs btn-info"><i class="ace-icon fa fa-user-plus bigger-120">&nbsp; &nbsp;Thêm danh mục</i></a>
+            <a href="{{ route('categories.index' ) }}" class="btn btn-success"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp; &nbsp;Refresh</a>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <div>
+                  <input class="form-control" type="search" name="q" {{ old('q') }} id="q" autofocus placeholder="Search ...">  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>      
       </div>
-      <form method="post" id="category_form" >
-        <div class="modal-body">
-          <div id="errorms">
+    </div>
+  </div>
+  <div class="bg-danger text-white" id="showerror">
+  
+  </div>
+  <h1>List Category</h1>
+  <input type="hidden" id="cid" name="cid" value="{{$id}}">
+  <table class="table table-light table-striped" id="category" style="width:100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+<!-- Modal tao -->
+  <div id="modalcreate" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Thêm danh mục</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="post" id="category_form" >
+          <div class="modal-body">
+            <div id="errorms">
             
-          </div>
-          <div class="form-group">
-            <label>Tên danh mục</label>
-            <input type="text" name="name" id="name" class="form-control">
-          </div>
-          <div class="form-group">
-            <select id="parent" name="parent_id" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Tên danh mục</label>
+              <input type="text" name="name" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <select id="parent" name="parent_id" class="form-control">
               
-            </select>
+              </select>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <input type="hidden" name="button_action" id="button_action" value="create">
-          <input type="hidden" name="id" id="category_id" value="">
-          <input type="submit" class="btn btn-primary" id="action" value="create">
-          <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-        </div>
-      </form>
+          <div class="modal-footer">
+            <input type="hidden" name="button_action" id="button_action" value="create">
+            <input type="hidden" name="id" id="category_id" value="">
+            <input type="submit" class="btn btn-primary" id="action" value="create">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">

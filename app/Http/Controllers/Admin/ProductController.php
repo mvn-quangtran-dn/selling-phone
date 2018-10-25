@@ -12,12 +12,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category', 'images')->get();
+        $products = Product::with('category', 'images')->orderBy('id', 'desc')->paginate(5);
         return view('admin.products.index', compact('products'));
     }
     public function create()
     {
-        $categories = Category::where('parent_id', '!=', "0")->get();
+        $categories = Category::where('parent_id', 1)->get();
         return view('admin.products.create', compact('categories'));
     }
     public function store(ProductValidate $request)
