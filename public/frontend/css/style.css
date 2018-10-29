@@ -348,6 +348,7 @@ body {
 	padding: 1.5%;
 	text-align: center;
 	position: relative;
+	height: 333px;
 }
 .images_1_of_4  img {
 	max-width: 100%;
@@ -355,8 +356,9 @@ body {
 .images_1_of_4  h2 {
 	color:#6A82A4;
 	font-family: 'ambleregular';
-	font-size:1.1em;
-	font-weight: normal;
+	font-size: 12px;
+    padding-top: 10px;
+    font-weight: normal;
 }
 .images_1_of_4  p {
 	font-size: 0.8125em;
@@ -2381,4 +2383,7 @@ div#tongtien {
 }
 span#totalcheckout {
     font-size: 30px;
+}
+.images_1_of_4 h2:hover a {
+    color: red;
 }

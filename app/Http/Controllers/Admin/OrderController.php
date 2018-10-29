@@ -20,10 +20,10 @@ class OrderController extends Controller
     {
         if($request->has('status')) {
             $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')
-                ->where('status_id', $request->get('status') )->get(); 
+                ->where('status_id', $request->get('status') )->paginate(7); 
         } else {
             $orders = Order::with('user', 'orderDetails', 'products' ,'paymentstatus','status')
-                    ->orderBy('id', 'desc')->get(); 
+                    ->orderBy('id', 'desc')->paginate(7); 
         }
         //dd($orders);
         return view('admin.orders.index', compact('orders'));

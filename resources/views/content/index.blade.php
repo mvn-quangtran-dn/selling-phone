@@ -22,7 +22,7 @@
                         <div class="clear"></div>             
                     </div>    
                         <div class="slide">
-<!--                                             <div class="slider-text">
+                            <!--<div class="slider-text">
                              <h1>Clearance<br><span>SALE</span></h1>
                              <h2>UPTo 40% OFF</h2>
                            <div class="features_list">
@@ -77,7 +77,7 @@
             <img src="{{url($image->name)}}" alt="" height="200px" />
             @endforeach
           </a>
-          <h2>{{$product->name}}</h2>
+          <h2><a href="{{ route('home.product', $product->id) }}">{{$product->name}}</a></h2>
             <div class="price-details">
                <div class="price-number">
                     <p><span class="rupees price-red" id="cangiua">{!!number_format($product->price,0,",",".") . 'đ'!!}</span></p>
@@ -108,10 +108,10 @@
           <img src="{{url($image->name)}}" alt="" height="200px" />
           @endforeach
         </a>
-        <h2>{{$product->name}}</h2>
+        <h2><a href="{{ route('home.product', $product->id) }}">{{$product->name}}</a></h2>
           <div class="price-details">
              <div class="price-number">
-                  <p><span class="rupees price-red">{!!number_format($product->price,0,",",".") . 'đ'!!}</span></p>
+                  <p><span class="rupees price-red" id="cangiua">{!!number_format($product->price,0,",",".") . 'đ'!!}</span></p>
               </div>
                       <div class="add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">                              
                           <h4><a href="#">Add to Cart</a></h4>

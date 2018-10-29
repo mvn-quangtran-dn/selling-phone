@@ -24,7 +24,7 @@
                         <img src="{{url($image->name)}}" alt="" height="200px" />
                         @endforeach
                         </a>
-                    <h2>{{$product->name}}</h2>
+                    <h2><a href="{{ route('home.product', $product->id) }}">{{$product->name}}</a></h2>
                     <div class="price-details">
                         <div class="price-number">
                             <p><span class="rupees price-red">{!!number_format($product->price,0,",",".") . 'đ'!!}</span></p>
@@ -32,16 +32,17 @@
                         <div class="add-cart" id="{{$product->id}}" data-name="{{$product->name}}" data-price="{{$product->price}}">                              
                             <h4><a href="#">Add to Cart</a></h4>
                          </div>
-                     <div class="clear"></div>
+                        <div class="clear"></div>
                     </div>
              
                 </div>
                     @endforeach
-                    <div id="pagining">
-                        {{$products->links()}}
-                    </div>
+                </div>
+                <div id="pagining">
+                    {!! $products->links() !!}
                 </div>
             </div>
+            
             <div class="rightsidebar span_3_of_1">
                 <h2>CATEGORIES</h2>
                 <ul class="side-w3ls">
