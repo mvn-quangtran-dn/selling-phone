@@ -22,16 +22,13 @@
       </div>
    </div>
 </div>
-<table class="table">
+<table class="table table-light table-striped">
   <tr>
     <th>ID</th>
     <th>Tên Khách Hàng</th>
     <th>Sản Phẩm</th>
     <th>Số lượng</th>
     <th>Giá</th>
-    <th>Payment</th>
-    <th>Status</th>
-    <th>Delete</th>
   </tr>
   @foreach($order_details as $detail)
   <tr>
@@ -40,9 +37,6 @@
     <td>{{$detail->product->name}}</td>
     <td>{{$detail->quantity}}</td>
     <td>{{$detail->quantity * $detail->product->price}}</td>
-    <td>#</td>
-    <td>#</td>
-    <td>#</td>
   @endforeach
 </table>
 <div class="modal modal-danger fade" id="delete" role="dialog">

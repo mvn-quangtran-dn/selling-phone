@@ -49,18 +49,19 @@
 				html = '';
 				var id = $(this).attr('id');
 				var qtt = parseInt($(this).val());
-				var endqtt = parseInt($(this).val());
-				console.log(qtt);
+				var endqtt = parseInt($(this).attr('data_id'));
+				console.log(endqtt);
 				$.ajax({
 					url: "{{route('orders.checkqtt')}}",
 					type: 'get',
 					dataType: 'json',
 					data: {id: id},
 				success: function(data) {
-					console.log(data);
+					
 					if (qtt < 1 || qtt > data ) {
 						alert("Số lượng không được nhỏ hơn 0 hoặc lơn hơn "+data);
-						$('#qtt').val(endqtt);
+						console.log(endqtt);
+						$('.soluong12').val(endqtt);
 					} else {
 						$.each(cart, function(index, val) {
 		 					if (val.id == id) {

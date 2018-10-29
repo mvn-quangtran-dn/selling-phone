@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Role;
 use App\User;
 use App\Order;
+use App\Comment;
 
 class UserController extends Controller
 {
@@ -60,6 +61,7 @@ class UserController extends Controller
             'password.required' => 'Mật khẩu không được để trống',
             'password.min' => 'Mật khẩu không được nhỏ hơn 6 ký tự',
             'confirm_password.same' => 'Mật khẩu không trùng khớp',
+            'confirm_password.required' => 'Mật khẩu nhập lại không được để trống',
             'yourname.required' => 'Họ và tên không được để trống',
             'phone.required' => 'Số điện thoại không được để trống',
             'phone.numeric' => 'Số điện thoại phải là ký tự số',
@@ -145,8 +147,9 @@ class UserController extends Controller
         // $user->delete();
         // return redirect()->route('users.index');
         $order_id = Order::where('user_id', $request->user_id)->first();
-        if($order_id) {
-            $request->session()->flash('error', 'Không được xóa người dùng đang đặt hàng');
+        $comment = Comment::where('user_id', $request->user_id)->first();
+        if($order_id || $comment) {
+            $request->session()->flash('error', 'Không được xóa người dùng');
             return redirect()->route('users.index');
         } else {
             $user = User::findOrFail($request->user_id);

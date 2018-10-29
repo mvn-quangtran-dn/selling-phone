@@ -73,11 +73,11 @@
             <div id="errorms">
             
             </div>
-            <div class="form-group">
+            <div class="form-group required">
               <label>Tên danh mục</label>
               <input type="text" name="name" id="name" class="form-control">
             </div>
-            <div class="form-group">
+            <div class="form-group required">
               <select id="parent" name="parent_id" class="form-control">
               
               </select>

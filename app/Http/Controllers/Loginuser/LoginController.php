@@ -75,7 +75,7 @@ class LoginController extends Controller
             'yourname' => $request->yourname,
             'phone' => $request->phone, 
             'address' => $request->address,
-            'role_id' => $request->role_id
+            'role_id' => 2
         ];
         User::create($data);
         $request->session()->flash('status', 'Đăng ký thành công!');

@@ -59,7 +59,7 @@
         @foreach($product->images as $image)
         <td><img src="{{url($image->name)}}" width="50px" height="50px"></td>
         @endforeach
-        <td>{{$product->name}}</td>
+        <td><a href="{{route('products.show', $product->id)}}">{{$product->name}}</a></td>
         <td>{{$product->quantity}}</td>
         <td>{{$product->price}}</td>
         <td>{{$product->category->name}}</td>

@@ -17,7 +17,7 @@ function printorder(data) {
 		checkhtml += '<tr>'
 			+ '<td>' + val.name + '</td>'
 			+ '<td>' + val.price + '</td>'
-			+ "<td id=\"soluong\">" + "<input type=\"number\" name=\"quantity\" id=\""+val.id+"\" value=\""+val.qtt+"\">" + '</td>'
+			+ "<td id=\"soluong\">" + "<input type=\"number\" name=\"quantity\" class=\"soluong12\" data_id=\""+val.qtt+"\" id=\""+val.id+"\" value=\""+val.qtt+"\">" + '</td>'
 			+ '<td id="subtotal">' + val.subtotal + '</td>'
 			+ '<td>' + '<button name="delete" class="btn btn-danger btn-xs remove" id="'+index+"\">Remove</button></td>"
 			+ '</tr>'; 

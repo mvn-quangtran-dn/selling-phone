@@ -60,16 +60,7 @@
 							@if ($errors->has('address'))
 						        <span class="text-danger">{{ $errors->first('address') }}</span>
 						    @endif
-						</div>
-<!-- 						<div class="required">
-							<span><label for="">Role</label></span>
-							<select name="role_id" id=""> 
-								<span><option value="2">{{  $role->name }}</option></pan>
-							</select>
-						</div> -->
-						<div>
-							<input type="hidden" name="role_id" value="2">
-						</div>
+						</div>				
 					   	<div>
 							<input type="submit" class="button" value="Đăng ký">
 						</div>

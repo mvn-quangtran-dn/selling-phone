@@ -33,7 +33,7 @@
       </div>
    </div>
 </div>
-<table class="table">
+<table class="table table-light table-striped">
     <tr>
         <th>ID</th>
         <th>Tên Khách Hàng</th>
@@ -52,7 +52,7 @@
             <td>{{$order->status['name']}}</td>
             <td>
               <?php if ($order->status_id == 3): ?>
-                <p class="text-center text-danger">Cancel</p>
+                <p class="text-danger">Cancel</p>
               <?php endif ?>
               <?php if ($order->payment_id != 1 && $order->status_id != 3): ?>
                 <a href="{{route('orders.payment',$order->id)}}"class="btn btn-info">Active Payment</a>
@@ -66,6 +66,7 @@
         </tr>
     @endforeach
 </table>
+<div class="text-center">{!! $orders->links() !!}</div>
 <div class="modal modal-danger fade" id="delete" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
